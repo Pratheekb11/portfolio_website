@@ -3,6 +3,8 @@
 import { motion } from "motion/react";
 import { PRODUCT } from "@/lib/data";
 import IndexRow from "@/components/ui/IndexRow";
+import Counter from "@/components/ui/Counter";
+import Scramble from "@/components/ui/Scramble";
 
 export default function Product() {
   return (
@@ -13,9 +15,9 @@ export default function Product() {
         <div className="mt-10 grid gap-8 sm:mt-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
           <div className="lg:sticky lg:top-[calc(var(--chrome-top)+3rem)] lg:self-start">
             <h2 className="d text-[clamp(2rem,6vw,4rem)]" style={{ color: "var(--bone)" }}>
-              I WANT THE
+              <Scramble text="I WANT THE" />
               <span className="block" style={{ color: "var(--blaze)" }}>
-                PRODUCT SEAT
+                <Scramble text="PRODUCT SEAT" speed={38} />
               </span>
             </h2>
             <p className="serif-it mt-5 max-w-md text-[1rem] leading-relaxed" style={{ color: "var(--ash)" }}>
@@ -45,7 +47,7 @@ export default function Product() {
                   </div>
                   <div className="shrink-0 text-right">
                     <div className="d text-[clamp(1.25rem,3vw,2rem)]" style={{ color: "var(--c-accent)" }}>
-                      {p.figure.value}
+                      <Counter value={p.figure.value} />
                     </div>
                     <div className="meta mt-1" style={{ fontSize: "0.5625rem" }}>
                       {p.figure.label}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { SECTIONS } from "@/lib/data";
+import Magnetic from "@/components/ui/Magnetic";
 
 export default function Chrome() {
   const [active, setActive] = useState(SECTIONS[0]);
@@ -97,6 +98,15 @@ export default function Chrome() {
                 {s.n}/{s.label}
                 <span
                   aria-hidden
+                  className="absolute -bottom-1.5 left-0 h-px w-full origin-left transition-transform duration-300"
+                  style={{
+                    background: "var(--blaze)",
+                    transform: on ? "scaleX(1)" : "scaleX(0)",
+                    transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                />
+                <span
+                  aria-hidden
                   className="absolute -right-2.5 top-1/2 -translate-y-1/2 transition-opacity duration-200"
                   style={{ opacity: on ? 1 : 0 }}
                 >
@@ -107,13 +117,15 @@ export default function Chrome() {
           })}
         </nav>
 
-        <a
-          href="#contact"
-          className="mono px-3 py-1.5 text-[0.6875rem] font-bold tracking-[0.16em] no-underline transition-transform duration-200 hover:-translate-y-px"
-          style={{ background: "var(--blaze)", color: "var(--void)" }}
-        >
-          GET IN TOUCH
-        </a>
+        <Magnetic strength={0.35}>
+          <a
+            href="#contact"
+            className="mono inline-block px-3 py-1.5 text-[0.6875rem] font-bold tracking-[0.16em] no-underline"
+            style={{ background: "var(--blaze)", color: "var(--void)" }}
+          >
+            GET IN TOUCH
+          </a>
+        </Magnetic>
       </header>
 
       <footer
@@ -138,6 +150,11 @@ export default function Chrome() {
           {active.n} / {active.label}
         </span>
 
+        <span
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-[2px] origin-left"
+          style={{ background: "var(--blaze)", transform: `scaleX(${scrl})` }}
+        />
         <div className="mono flex items-center gap-4 text-[0.625rem] tracking-[0.16em]" style={{ color: "var(--ash)" }}>
           <span className="hidden items-center gap-1.5 sm:flex">
             ACCENT

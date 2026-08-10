@@ -22,7 +22,12 @@ export default function Intro() {
       style={{ minHeight: "100svh", paddingTop: "var(--chrome-top)", paddingBottom: "var(--chrome-bot)" }}
     >
       {/* one continuous dot field across the whole screen; he resolves out of the left of it */}
-      <div className="pointer-events-none absolute inset-0">
+      <motion.div
+        className="pointer-events-none absolute inset-0"
+        initial={{ opacity: 0, scale: 1.04 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+      >
         <Halftone
           src="/media/player.jpg"
           cell={7}
@@ -41,7 +46,7 @@ export default function Intro() {
               "linear-gradient(to right, var(--void) 4%, transparent 58%), linear-gradient(to bottom, var(--void) 1%, transparent 12%)",
           }}
         />
-      </div>
+      </motion.div>
 
       <div className="shell relative flex w-full flex-col justify-between py-10 sm:py-14">
         <motion.div custom={0} variants={rise} initial="hidden" animate="shown" className="">
@@ -56,26 +61,34 @@ export default function Intro() {
 
         <div>
           <h1 className="d select-none text-[clamp(3rem,10vw,8.5rem)]">
-            <motion.span
-              custom={1}
-              variants={rise}
-              initial="hidden"
-              animate="shown"
-              className="block"
-              style={{ color: "var(--bone)", fontWeight: 400, letterSpacing: "-0.015em" }}
-            >
-              PRATHEEK
-            </motion.span>
-            <motion.span
-              custom={2}
-              variants={rise}
-              initial="hidden"
-              animate="shown"
-              className="block"
-              style={{ color: "var(--blaze)", fontWeight: 900, letterSpacing: "-0.04em" }}
-            >
-              B.
-            </motion.span>
+            <span className="block overflow-hidden pb-[0.04em]">
+              {"PRATHEEK".split("").map((ch, i) => (
+                <motion.span
+                  key={`${ch}-${i}`}
+                  initial={{ y: "108%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.85, delay: 0.14 + i * 0.045, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block"
+                  style={{ color: "var(--bone)", fontWeight: 400, letterSpacing: "-0.015em" }}
+                >
+                  {ch}
+                </motion.span>
+              ))}
+            </span>
+            <span className="block overflow-hidden pb-[0.04em]">
+              {"B.".split("").map((ch, i) => (
+                <motion.span
+                  key={`${ch}-${i}`}
+                  initial={{ y: "108%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.85, delay: 0.5 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block"
+                  style={{ color: "var(--blaze)", fontWeight: 900, letterSpacing: "-0.04em" }}
+                >
+                  {ch}
+                </motion.span>
+              ))}
+            </span>
           </h1>
 
           <motion.p
@@ -106,6 +119,24 @@ export default function Intro() {
           </motion.div>
         </div>
       </div>
+
+      <motion.a
+        href="#builds"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1.2 }}
+        className="meta absolute bottom-6 right-[clamp(1rem,4vw,3.5rem)] hidden items-center gap-2 no-underline sm:flex"
+        style={{ color: "var(--ash)" }}
+      >
+        SCROLL
+        <motion.span
+          animate={{ y: [0, 4, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          style={{ color: "var(--blaze)" }}
+        >
+          ↓
+        </motion.span>
+      </motion.a>
     </section>
   );
 }

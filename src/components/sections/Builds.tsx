@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { LOADOUTS, type Loadout } from "@/lib/data";
 import IndexRow from "@/components/ui/IndexRow";
+import Magnetic from "@/components/ui/Magnetic";
 import Marquee from "@/components/fx/Marquee";
 
 function Corner({ className }: { className: string }) {
@@ -21,7 +22,7 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   // the card underneath settles back as the next one arrives over it
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.965]);
-  const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.4]);
+  const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.45]);
 
   return (
     <div ref={ref} className="relative pb-4" style={{ minHeight: last ? undefined : "min(94svh, 46rem)" }}>
@@ -69,15 +70,17 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
 
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
               {item.live ? (
-                <a
-                  href={item.live}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="mono px-4 py-2.5 text-[0.6875rem] font-bold tracking-[0.16em] no-underline transition-opacity duration-200 hover:opacity-85"
-                  style={{ background: "var(--blaze)", color: "var(--void)", borderRadius: 6 }}
-                >
-                  Open live site →
-                </a>
+                <Magnetic>
+                  <a
+                    href={item.live}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="mono inline-block px-4 py-2.5 text-[0.6875rem] font-bold tracking-[0.16em] no-underline transition-opacity duration-200 hover:opacity-85"
+                    style={{ background: "var(--blaze)", color: "var(--void)", borderRadius: 6 }}
+                  >
+                    Open live site →
+                  </a>
+                </Magnetic>
               ) : (
                 <span className="meta">{item.status}</span>
               )}
@@ -98,7 +101,7 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
                 href={item.live}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="block w-full overflow-hidden"
+                className="group/shot block aspect-[16/10] w-full overflow-hidden"
                 style={{ borderRadius: 8 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -106,7 +109,7 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
                   src={item.shot}
                   alt={`Screenshot of the ${item.name} site`}
                   loading="lazy"
-                  className="block aspect-[16/10] w-full object-cover object-top"
+                  className="block h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover/shot:scale-[1.05]"
                 />
               </a>
             ) : (
