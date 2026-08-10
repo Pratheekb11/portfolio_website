@@ -26,8 +26,9 @@ export default function Stack() {
             <Halftone
               src="/media/player.jpg"
               cell={5}
-              focus={[0.5, 0.38]}
-              falloff={0.6}
+              mode="duotone"
+              fill="var(--blaze)"
+              anchor={[0.5, 0.05]}
               className="h-full w-full"
             />
           </div>

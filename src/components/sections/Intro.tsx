@@ -25,25 +25,26 @@ export default function Intro() {
       <div className="pointer-events-none absolute inset-0">
         <Halftone
           src="/media/player.jpg"
-          cell={6}
-          region={[-0.04, 0.02, 0.56, 0.98]}
+          cell={7}
+          shape="square"
+          region={[0.46, 0.02, 0.58, 0.98]}
           anchor={[0.5, 0.02]}
-          focus={[0.2, 0.44]}
-          falloff={0.62}
-          baseline={0.085}
-          className="h-full w-full"
+          focus={[0.77, 0.45]}
+          falloff={0.44}
+          baseline={0.075}
+          className="h-full w-full opacity-70 sm:opacity-100"
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to left, var(--void) 4%, transparent 58%), linear-gradient(to bottom, var(--void) 1%, transparent 12%)",
+              "linear-gradient(to right, var(--void) 4%, transparent 58%), linear-gradient(to bottom, var(--void) 1%, transparent 12%)",
           }}
         />
       </div>
 
       <div className="shell relative flex w-full flex-col justify-between py-10 sm:py-14">
-        <motion.div custom={0} variants={rise} initial="hidden" animate="shown" className="sm:text-right">
+        <motion.div custom={0} variants={rise} initial="hidden" animate="shown" className="">
           <p
             className="d text-[clamp(1.125rem,2.4vw,1.625rem)]"
             style={{ color: "var(--bone)", letterSpacing: "0.01em", fontWeight: 600 }}
@@ -53,7 +54,7 @@ export default function Intro() {
           <p className="meta mt-2">AGENTIC SYSTEMS · LLM INFRASTRUCTURE · PRODUCT THINKING</p>
         </motion.div>
 
-        <div className="sm:text-right">
+        <div>
           <h1 className="d select-none text-[clamp(3rem,10vw,8.5rem)]">
             <motion.span
               custom={1}
@@ -82,7 +83,7 @@ export default function Intro() {
             variants={rise}
             initial="hidden"
             animate="shown"
-            className="mt-6 max-w-md text-[1rem] leading-relaxed sm:ml-auto sm:text-right"
+            className="mt-6 max-w-md text-[1rem] leading-relaxed"
             style={{ color: "var(--ash)" }}
           >
             I talk to the people losing time before I open an editor, then ship the fix they
@@ -94,7 +95,7 @@ export default function Intro() {
             variants={rise}
             initial="hidden"
             animate="shown"
-            className="mt-7 flex flex-wrap gap-x-7 gap-y-2.5 sm:justify-end"
+            className="mt-7 flex flex-wrap gap-x-7 gap-y-2.5"
           >
             {CHIPS.map((c) => (
               <span key={c} className="meta flex items-center gap-2.5" style={{ textTransform: "none" }}>
