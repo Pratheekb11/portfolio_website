@@ -29,28 +29,25 @@ export default function Contact() {
           Email is the fastest way to reach me. I read everything.
         </p>
 
-        <ul className="mt-12">
+        <ul className="mt-12 space-y-3">
           {LINKS.map((l) => (
-            <li key={l.label} className="border-t" style={{ borderColor: "var(--rail)" }}>
+            <li key={l.label} className="card card-invert overflow-hidden">
               <a
                 href={l.href}
                 target={l.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noreferrer noopener"
-                className="group flex items-center justify-between gap-6 py-6 no-underline"
+                className="group flex items-center justify-between gap-6 px-6 py-5 no-underline sm:px-8 sm:py-6"
               >
-                <span
-                  className="d text-[clamp(1.5rem,5vw,3.25rem)] transition-colors duration-300 group-hover:text-[var(--blaze)]"
-                  style={{ color: "var(--bone)" }}
-                >
+                <span className="d text-[clamp(1.5rem,5vw,3.25rem)]" style={{ color: "var(--c-title)" }}>
                   {l.label}
                 </span>
                 <span className="flex items-center gap-5">
-                  <span className="mono hidden text-[0.8125rem] sm:inline" style={{ color: "var(--ash)" }}>
+                  <span className="mono hidden text-[0.8125rem] sm:inline" style={{ color: "var(--c-body)" }}>
                     {l.value}
                   </span>
                   <span
                     className="mono text-[1.125rem] transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ color: "var(--blaze)" }}
+                    style={{ color: "var(--c-accent)" }}
                   >
                     →
                   </span>
@@ -59,7 +56,6 @@ export default function Contact() {
             </li>
           ))}
         </ul>
-        <div className="rule" />
 
         <div className="flex flex-wrap items-center justify-between gap-3 py-8">
           <span className="meta">BUILT BY PRATHEEK B · NEXT.JS · 2026</span>

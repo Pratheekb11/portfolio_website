@@ -32,19 +32,19 @@ export default function Product() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-8%" }}
                 transition={{ duration: 0.45, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="card card-hover p-6 sm:p-8"
+                className="card card-invert p-6 sm:p-8"
               >
                 <div className="flex items-start justify-between gap-6">
                   <div className="min-w-0">
-                    <span className="mono text-[0.625rem] tracking-[0.2em]" style={{ color: "var(--blaze)" }}>
+                    <span className="mono text-[0.625rem] tracking-[0.2em]" style={{ color: "var(--c-accent)" }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="d mt-2 text-[clamp(1.25rem,3.2vw,2rem)]" style={{ color: "var(--bone)" }}>
+                    <h3 className="d mt-2 text-[clamp(1.25rem,3.2vw,2rem)]" style={{ color: "var(--c-title)" }}>
                       {p.title}
                     </h3>
                   </div>
                   <div className="shrink-0 text-right">
-                    <div className="d text-[clamp(1.25rem,3vw,2rem)]" style={{ color: "var(--blaze)" }}>
+                    <div className="d text-[clamp(1.25rem,3vw,2rem)]" style={{ color: "var(--c-accent)" }}>
                       {p.figure.value}
                     </div>
                     <div className="meta mt-1" style={{ fontSize: "0.5625rem" }}>
@@ -53,10 +53,10 @@ export default function Product() {
                   </div>
                 </div>
 
-                <p className="serif-it mt-4 text-[1rem] leading-relaxed" style={{ color: "var(--bone)" }}>
+                <p className="serif-it mt-4 text-[1rem] leading-relaxed" style={{ color: "var(--c-title)" }}>
                   {p.lead}
                 </p>
-                <p className="mt-3 text-[0.9375rem] leading-relaxed" style={{ color: "var(--ash)" }}>
+                <p className="mt-3 text-[0.9375rem] leading-relaxed" style={{ color: "var(--c-body)" }}>
                   {p.body}
                 </p>
               </motion.article>

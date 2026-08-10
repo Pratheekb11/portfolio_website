@@ -23,7 +23,7 @@ export default function Work() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-8%" }}
                 transition={{ duration: 0.45, delay: (i % 3) * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="card card-hover overflow-hidden"
+                className="card card-invert overflow-hidden"
                 style={on ? { borderColor: "color-mix(in oklab, var(--blaze) 45%, var(--rail))" } : undefined}
               >
                 <button
@@ -33,13 +33,13 @@ export default function Work() {
                   style={{ background: "transparent", border: 0 }}
                 >
                   <div className="mono flex gap-4 text-[0.625rem] leading-relaxed tracking-[0.16em] sm:flex-col sm:gap-0">
-                    <span style={{ color: on ? "var(--blaze)" : "var(--bone)" }}>
+                    <span style={{ color: on ? "var(--c-accent)" : "var(--c-title)" }}>
                       {String(i + 1).padStart(3, "0")}
                     </span>
-                    <span style={{ color: "var(--ash)" }}>
+                    <span style={{ color: "var(--c-body)" }}>
                       {m.period.replace(" to ", " / ").toUpperCase()}
                     </span>
-                    <span className="hidden sm:inline" style={{ color: "var(--ash)" }}>
+                    <span className="hidden sm:inline" style={{ color: "var(--c-body)" }}>
                       BOSCH
                     </span>
                   </div>
@@ -47,17 +47,17 @@ export default function Work() {
                   <div className="min-w-0">
                     <h3
                       className="d text-[clamp(1.5rem,4.6vw,3rem)] transition-colors duration-300"
-                      style={{ color: on ? "var(--blaze)" : "var(--bone)" }}
+                      style={{ color: on ? "var(--c-accent)" : "var(--c-title)" }}
                     >
                       {m.op}
                     </h3>
-                    <p className="serif-it mt-2 text-[0.9375rem]" style={{ color: "var(--ash)" }}>
+                    <p className="serif-it mt-2 text-[0.9375rem]" style={{ color: "var(--c-body)" }}>
                       {m.short}
                     </p>
                   </div>
 
                   <div className="flex shrink-0 items-baseline gap-4 sm:flex-col sm:items-end sm:gap-1">
-                    <span className="d text-[clamp(1.25rem,3vw,2rem)]" style={{ color: "var(--bone)" }}>
+                    <span className="d text-[clamp(1.25rem,3vw,2rem)]" style={{ color: "var(--c-title)" }}>
                       {m.metric.value}
                     </span>
                     <span className="meta" style={{ fontSize: "0.5625rem" }}>
@@ -65,7 +65,7 @@ export default function Work() {
                     </span>
                     <span
                       className="mono ml-auto text-[0.6875rem] sm:ml-0 sm:mt-2"
-                      style={{ color: "var(--blaze)" }}
+                      style={{ color: "var(--c-accent)" }}
                     >
                       {on ? "CLOSE −" : "DETAIL +"}
                     </span>
@@ -81,7 +81,7 @@ export default function Work() {
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="border-t px-5 pb-7 pt-6 sm:px-7" style={{ borderColor: "var(--rail)" }}>
+                      <div className="border-t px-5 pb-7 pt-6 sm:px-7" style={{ borderColor: "var(--c-line)" }}>
                         <div className="grid gap-7 lg:grid-cols-3">
                           {(
                             [
@@ -94,13 +94,13 @@ export default function Work() {
                               <div className="flex items-center gap-2">
                                 <span
                                   className="inline-block h-1.5 w-1.5"
-                                  style={{ background: j === 2 ? "var(--blaze)" : "var(--rail)" }}
+                                  style={{ background: j === 2 ? "var(--c-accent)" : "var(--c-line)" }}
                                 />
                                 <span className="meta">{k}</span>
                               </div>
                               <p
                                 className="mt-3 text-[0.9375rem] leading-relaxed"
-                                style={{ color: j === 0 ? "var(--ash)" : "var(--bone)" }}
+                                style={{ color: j === 0 ? "var(--c-body)" : "var(--c-title)" }}
                               >
                                 {v}
                               </p>

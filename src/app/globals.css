@@ -83,8 +83,39 @@ body {
   border: 1px solid var(--rail);
   border-radius: 14px;
 }
-.card-hover { transition: border-color 0.25s ease, background-color 0.25s ease; }
-.card-hover:hover { border-color: color-mix(in oklab, var(--blaze) 45%, var(--rail)); }
+
+/* Hovering a card floods it with the accent and flips the text to the
+   ground colour. Children read their colours from these variables so the
+   whole block inverts as one. */
+.card-invert {
+  --c-title: var(--bone);
+  --c-body: var(--ash);
+  --c-accent: var(--blaze);
+  --c-line: var(--rail);
+  transition:
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-invert *,
+.card-invert *::before,
+.card-invert *::after {
+  transition:
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-invert .meta { color: var(--c-body); }
+
+@media (hover: hover) and (pointer: fine) {
+  .card-invert:hover {
+    background: var(--blaze);
+    border-color: var(--blaze);
+    --c-title: var(--void);
+    --c-body: color-mix(in oklab, var(--void) 72%, transparent);
+    --c-accent: var(--void);
+    --c-line: color-mix(in oklab, var(--void) 20%, transparent);
+  }
+}
 
 .shell { padding-inline: clamp(1rem, 4vw, 3.5rem); }
 
