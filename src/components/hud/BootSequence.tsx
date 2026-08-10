@@ -1,106 +1,85 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { PLAYER } from "@/lib/data";
-import { pushFeed } from "./feed";
 
-const LINES = [
-  "init runtime .......... ok",
-  "mount memory layers ... intent / decisions / deltas",
-  "load agent graph ...... 6 nodes, 0 orphans",
-  "index missions ........ 6 records",
-  "verify loadout ........ 5 builds, 2 live",
-  "handshake ............. ready",
-];
-
+/* A loader, not a cutscene: a counter runs to 100 while the page settles,
+   then the panel splits and gets out of the way. Once per session. */
 export default function BootSequence({ children }: { children: React.ReactNode }) {
-  const [booted, setBooted] = useState(true); // assume booted until we know otherwise
-  const [step, setStep] = useState(0);
-  const [ready, setReady] = useState(false);
-  const timers = useRef<number[]>([]);
+  const [booted, setBooted] = useState(true);
+  const [pct, setPct] = useState(0);
+  const [leaving, setLeaving] = useState(false);
+  const raf = useRef(0);
 
   useEffect(() => {
     const seen = sessionStorage.getItem("booted") === "1";
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (seen || still) {
-      setBooted(true);
-      return;
-    }
+    if (seen || still) return;
+
     setBooted(false);
     document.body.style.overflow = "hidden";
-    LINES.forEach((_, i) => {
-      timers.current.push(
-        window.setTimeout(() => {
-          setStep(i + 1);
-          if (i === LINES.length - 1) setReady(true);
-        }, 260 + i * 190)
-      );
-    });
+
+    const start = performance.now();
+    const DUR = 1500;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / DUR);
+      // ease out so the last numbers land slowly, like a real load
+      setPct(Math.round((1 - Math.pow(1 - p, 2.2)) * 100));
+      if (p < 1) raf.current = requestAnimationFrame(tick);
+      else finish();
+    };
+    raf.current = requestAnimationFrame(tick);
+
     return () => {
-      timers.current.forEach(clearTimeout);
+      cancelAnimationFrame(raf.current);
       document.body.style.overflow = "";
     };
   }, []);
 
-  const start = useCallback(() => {
+  const finish = useCallback(() => {
     sessionStorage.setItem("booted", "1");
-    document.body.style.overflow = "";
-    setBooted(true);
-    pushFeed({ kind: "unlock", actor: PLAYER.callsign, verb: "deployed", target: "PORTFOLIO" }, "boot");
+    setLeaving(true);
+    setTimeout(() => {
+      document.body.style.overflow = "";
+      setBooted(true);
+    }, 720);
   }, []);
-
-  useEffect(() => {
-    if (booted) return;
-    const key = () => (ready ? start() : setStep(LINES.length));
-    window.addEventListener("keydown", key);
-    return () => window.removeEventListener("keydown", key);
-  }, [booted, ready, start]);
 
   return (
     <>
       {!booted && (
-        <div
-          className="fixed inset-0 z-[500] flex flex-col items-center justify-center px-6"
-          style={{ background: "var(--void)" }}
-        >
-          <div className="w-full max-w-lg">
-            <div className="mb-6 flex items-baseline justify-between border-b pb-3" style={{ borderColor: "var(--rail)" }}>
-              <span className="t-display text-2xl" style={{ color: "var(--sand)" }}>
-                {PLAYER.handle}
-              </span>
-              <span className="t-label">{PLAYER.class}</span>
-            </div>
-            <div className="t-data space-y-1 text-[0.75rem] leading-relaxed" style={{ color: "var(--ghost)" }}>
-              {LINES.slice(0, step).map((l) => {
-                const [k, v] = l.split(/\s\.+\s/);
-                return (
-                  <div key={l} className="flex gap-2">
-                    <span style={{ color: "var(--comms)" }}>›</span>
-                    <span className="flex-1">{k}</span>
-                    <span style={{ color: "var(--pitch)" }}>{v}</span>
-                  </div>
-                );
-              })}
-              {step < LINES.length && <span className="blink" style={{ color: "var(--signal)" }}>█</span>}
-            </div>
-
-            <button
-              onClick={start}
-              disabled={!ready}
-              className="panel-sm mt-8 w-full border py-3 text-center transition-colors duration-200 disabled:opacity-30"
+        <div className="fixed inset-0 z-[500] overflow-hidden" aria-hidden>
+          {/* two halves that part when loading completes */}
+          {([0, 1] as const).map((half) => (
+            <div
+              key={half}
+              className="absolute inset-x-0 h-1/2 transition-transform duration-700"
               style={{
-                borderColor: ready ? "var(--signal)" : "var(--rail)",
-                background: "transparent",
-                color: ready ? "var(--signal)" : "var(--ghost)",
+                background: "var(--void)",
+                top: half === 0 ? 0 : "50%",
+                transform: leaving ? `translateY(${half === 0 ? "-100%" : "100%"})` : "translateY(0)",
+                transitionTimingFunction: "cubic-bezier(0.76, 0, 0.24, 1)",
               }}
-            >
-              <span className="t-data text-[0.75rem] font-bold tracking-[0.3em]">
-                {ready ? "PRESS START" : "LOADING"}
+            />
+          ))}
+
+          <div
+            className="shell absolute inset-0 flex flex-col justify-end pb-10 transition-opacity duration-300"
+            style={{ opacity: leaving ? 0 : 1 }}
+          >
+            <div className="flex items-end justify-between gap-6">
+              <span className="d text-[clamp(2rem,9vw,7rem)]" style={{ color: "var(--bone)" }}>
+                PRATHEEK B.
               </span>
-            </button>
-            <p className="t-label mt-3 text-center" style={{ fontSize: "0.625rem" }}>
-              or hit any key
-            </p>
+              <span className="d text-[clamp(2rem,9vw,7rem)]" style={{ color: "var(--blaze)" }}>
+                {String(pct).padStart(3, "0")}
+              </span>
+            </div>
+            <div className="mt-6 h-px w-full" style={{ background: "var(--rail)" }}>
+              <div
+                className="h-full"
+                style={{ width: `${pct}%`, background: "var(--blaze)" }}
+              />
+            </div>
           </div>
         </div>
       )}

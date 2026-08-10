@@ -1,17 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { OFF_DUTY, PLAYER } from "@/lib/data";
-import SectionHeader from "@/components/ui/SectionHeader";
-import Reveal from "@/components/ui/Reveal";
-import { pushFeed } from "@/components/hud/feed";
+import { useCallback, useEffect, useState } from "react";
+import { motion } from "motion/react";
+import { OFF_DUTY } from "@/lib/data";
+import IndexRow from "@/components/ui/IndexRow";
+import Marquee from "@/components/fx/Marquee";
 
 const ROUND_MS = 12000;
-
 type Blip = { id: number; x: number; y: number; born: number };
 
 function FlickTest() {
-  const arena = useRef<HTMLDivElement>(null);
   const [running, setRunning] = useState(false);
   const [blips, setBlips] = useState<Blip[]>([]);
   const [hits, setHits] = useState(0);
@@ -26,13 +24,11 @@ function FlickTest() {
   }, []);
 
   const spawn = useCallback(() => {
-    setBlips((prev) => {
-      if (prev.length >= 3) return prev;
-      return [
-        ...prev,
-        { id: Date.now() + Math.random(), x: 8 + Math.random() * 84, y: 12 + Math.random() * 76, born: performance.now() },
-      ];
-    });
+    setBlips((prev) =>
+      prev.length >= 3
+        ? prev
+        : [...prev, { id: Date.now() + Math.random(), x: 8 + Math.random() * 84, y: 12 + Math.random() * 76, born: performance.now() }]
+    );
   }, []);
 
   useEffect(() => {
@@ -50,13 +46,9 @@ function FlickTest() {
   useEffect(() => {
     if (running || left === ROUND_MS) return;
     setBlips([]);
-    if (hits > 0) {
-      const stored = Number(localStorage.getItem("flick-best") ?? 0);
-      if (hits > stored) {
-        localStorage.setItem("flick-best", String(hits));
-        setBest(hits);
-        pushFeed({ kind: "unlock", actor: "you", verb: "set record", target: `${hits} HITS` });
-      }
+    if (hits > Number(localStorage.getItem("flick-best") ?? 0)) {
+      localStorage.setItem("flick-best", String(hits));
+      setBest(hits);
     }
   }, [running, left, hits]);
 
@@ -80,40 +72,34 @@ function FlickTest() {
   const acc = hits + misses > 0 ? Math.round((hits / (hits + misses)) * 100) : 100;
 
   return (
-    <div className="panel flex h-full flex-col p-5 sm:p-6">
-      <div className="flex items-center justify-between gap-3">
+    <div>
+      <div className="flex items-end justify-between gap-4">
         <div>
-          <h3 className="t-data text-[0.75rem] font-bold tracking-[0.2em]" style={{ color: "var(--hud)" }}>
+          <h3 className="d text-[clamp(1.5rem,4vw,2.5rem)]" style={{ color: "var(--bone)" }}>
             FLICK TEST
           </h3>
-          <p className="t-label mt-1" style={{ fontSize: "0.5625rem" }}>
-            12 SECONDS · CLICK THE TARGETS
+          <p className="serif-it mt-1 text-[0.9375rem]" style={{ color: "var(--ash)" }}>
+            Twelve seconds. Click the targets. Your best is saved.
           </p>
         </div>
         <div className="text-right">
-          <div className="t-data text-lg font-bold" style={{ color: running ? "var(--signal)" : "var(--ghost)" }}>
-            {(left / 1000).toFixed(1)}s
+          <div className="d text-[clamp(1.5rem,4vw,2.5rem)]" style={{ color: running ? "var(--blaze)" : "var(--ash)" }}>
+            {(left / 1000).toFixed(1)}
           </div>
-          {best !== null && (
-            <div className="t-label" style={{ fontSize: "0.5625rem" }}>
-              BEST {best}
-            </div>
-          )}
+          <div className="meta">{best !== null ? `BEST ${best}` : "SECONDS"}</div>
         </div>
       </div>
 
       <div
-        ref={arena}
         onClick={() => running && setMisses((m) => m + 1)}
         data-target
-        className="relative mt-4 aspect-[16/10] w-full overflow-hidden"
+        className="relative mt-5 aspect-[16/9] w-full overflow-hidden border"
         style={{
-          clipPath: "var(--clip-sm)",
-          background: "var(--void)",
-          border: `1px solid ${running ? "var(--signal)" : "var(--rail)"}`,
+          borderColor: running ? "var(--blaze)" : "var(--rail)",
+          background: "var(--pit)",
           backgroundImage:
-            "linear-gradient(to right, rgba(95,168,255,.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(95,168,255,.10) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
+            "linear-gradient(to right, rgba(255,90,31,.13) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,90,31,.13) 1px, transparent 1px)",
+          backgroundSize: "34px 34px",
         }}
       >
         {blips.map((b) => (
@@ -121,51 +107,49 @@ function FlickTest() {
             key={b.id}
             onClick={(e) => hit(b, e)}
             aria-label="target"
-            className="absolute h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            className="absolute h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{
               left: `${b.x}%`,
               top: `${b.y}%`,
-              background: "color-mix(in oklab, var(--signal) 22%, transparent)",
-              border: "2px solid var(--signal)",
+              background: "color-mix(in oklab, var(--blaze) 26%, transparent)",
+              border: "2px solid var(--blaze)",
               animation: "blipIn 140ms ease-out",
             }}
           />
         ))}
 
         {!running && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-4 text-center"
-            style={{ background: "color-mix(in oklab, var(--void) 78%, transparent)" }}>
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-4 text-center"
+            style={{ background: "color-mix(in oklab, var(--pit) 80%, transparent)" }}
+          >
             {left < ROUND_MS && (
-              <div className="t-data text-[0.75rem]" style={{ color: "var(--sand)" }}>
-                {hits} hits · {acc}% accuracy · {avg}ms avg
-              </div>
+              <p className="mono text-[0.8125rem]" style={{ color: "var(--bone)" }}>
+                {hits} hits · {acc}% accuracy · {avg}ms average
+              </p>
             )}
             <button
               onClick={start}
-              className="panel-sm border px-5 py-2.5"
-              style={{ borderColor: "var(--signal)", color: "var(--signal)" }}
+              className="mono px-5 py-3 text-[0.6875rem] font-bold tracking-[0.18em]"
+              style={{ background: "var(--blaze)", color: "var(--void)", border: 0 }}
             >
-              <span className="t-data text-[0.6875rem] font-bold tracking-[0.22em]">
-                {left < ROUND_MS ? "RUN AGAIN" : "START ROUND"}
-              </span>
+              {left < ROUND_MS ? "RUN IT AGAIN" : "START"}
             </button>
           </div>
         )}
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-3 border-t pt-4" style={{ borderColor: "var(--rail)" }}>
+      <div className="mt-5 grid grid-cols-3 border-t pt-5" style={{ borderColor: "var(--rail)" }}>
         {[
-          ["HITS", String(hits), "var(--signal)"],
-          ["ACC", `${acc}%`, "var(--pitch)"],
-          ["AVG", avg ? `${avg}ms` : "—", "var(--comms)"],
-        ].map(([k, v, c]) => (
+          ["HITS", String(hits)],
+          ["ACCURACY", `${acc}%`],
+          ["REACTION", avg ? `${avg}ms` : "—"],
+        ].map(([k, v]) => (
           <div key={k}>
-            <div className="t-data text-base font-bold" style={{ color: c }}>
+            <div className="d text-[clamp(1.25rem,3vw,2rem)]" style={{ color: "var(--blaze)" }}>
               {v}
             </div>
-            <div className="t-label" style={{ fontSize: "0.5625rem" }}>
-              {k}
-            </div>
+            <div className="meta mt-1">{k}</div>
           </div>
         ))}
       </div>
@@ -175,45 +159,45 @@ function FlickTest() {
 
 export default function OffDuty() {
   return (
-    <section id="offduty" className="relative mx-auto w-full max-w-6xl px-4 py-24 sm:px-8 sm:py-32">
-      <SectionHeader
-        index="04"
-        kicker="OFF-DUTY"
-        title="WHEN I'M NOT SHIPPING"
-        blurb={`Same instincts, different arena. ${PLAYER.callsign} spends the rest of the week here.`}
-      />
+    <section id="offduty" className="relative w-full py-20 sm:py-28">
+      <div className="shell">
+        <IndexRow n="04" right="OUTSIDE THE EDITOR" />
+      </div>
 
-      <div className="grid gap-5 lg:grid-cols-[1fr_1.1fr]">
-        <div className="flex flex-col gap-3">
+      <div className="mt-8 sm:mt-12">
+        <Marquee text="OFF DUTY HOURS" solid="OFF" speed={260} />
+      </div>
+
+      <div className="shell mt-10 grid gap-12 sm:mt-16 lg:grid-cols-2 lg:gap-16">
+        <div>
           {OFF_DUTY.map((o, i) => (
-            <Reveal key={o.id} delay={i * 0.07}>
-              <div
-                data-target
-                className="panel group flex items-start gap-4 p-5 transition-colors duration-300"
-                style={{ borderColor: "var(--rail)" }}
-              >
-                <span className="mt-1 block h-8 w-1 shrink-0" style={{ background: o.color }} />
-                <div>
-                  <div className="flex items-center gap-2.5">
-                    <h3 className="t-data text-[0.8125rem] font-bold tracking-[0.16em]" style={{ color: "var(--hud)" }}>
-                      {o.title}
-                    </h3>
-                    <span className="t-data text-[0.5625rem] tracking-[0.2em]" style={{ color: o.color }}>
-                      {o.kind}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-[0.9375rem] leading-relaxed" style={{ color: "var(--ghost)" }}>
-                    {o.line}
-                  </p>
-                </div>
+            <motion.div
+              key={o.id}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-12%" }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="group border-t py-7"
+              style={{ borderColor: "var(--rail)" }}
+            >
+              <div className="flex items-baseline justify-between gap-4">
+                <h3
+                  className="d text-[clamp(1.5rem,4.5vw,3rem)] transition-colors duration-300 group-hover:text-[var(--blaze)]"
+                  style={{ color: "var(--bone)" }}
+                >
+                  {o.title}
+                </h3>
+                <span className="meta shrink-0">{o.kind}</span>
               </div>
-            </Reveal>
+              <p className="serif-it mt-3 max-w-md text-[1rem] leading-relaxed" style={{ color: "var(--ash)" }}>
+                {o.line}
+              </p>
+            </motion.div>
           ))}
+          <div className="rule" />
         </div>
 
-        <Reveal delay={0.1}>
-          <FlickTest />
-        </Reveal>
+        <FlickTest />
       </div>
     </section>
   );

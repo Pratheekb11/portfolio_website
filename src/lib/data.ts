@@ -21,6 +21,7 @@ export const PLAYER = {
 export type Mission = {
   id: string;
   op: string;
+  short: string;
   org: string;
   role: string;
   period: string;
@@ -37,7 +38,8 @@ export type Mission = {
 export const MISSIONS: Mission[] = [
   {
     id: "m01",
-    op: "OPERATION: SHARED CONTEXT",
+    op: "INSTRUCTION SETS",
+    short: "Shared context for every coding agent in the org",
     org: "Bosch Global Software Technologies",
     role: "Gen AI Engineer",
     period: "Jan 2024 — Present",
@@ -53,7 +55,8 @@ export const MISSIONS: Mission[] = [
   },
   {
     id: "m02",
-    op: "OPERATION: HANDOFF",
+    op: "MULTI-AGENT SDLC",
+    short: "Review, design and test assist with human gates",
     org: "Bosch Global Software Technologies",
     role: "Gen AI Engineer",
     period: "2024 — Present",
@@ -68,7 +71,8 @@ export const MISSIONS: Mission[] = [
   },
   {
     id: "m03",
-    op: "OPERATION: LONG MEMORY",
+    op: "LAYERED MEMORY",
+    short: "Intent, decisions and deltas that survive long chains",
     org: "Bosch Global Software Technologies",
     role: "Gen AI Engineer",
     period: "2024 — Present",
@@ -83,7 +87,8 @@ export const MISSIONS: Mission[] = [
   },
   {
     id: "m04",
-    op: "OPERATION: DEEP INDEX",
+    op: "PRODUCTION RAG",
+    short: "Chunking, retrieval and reranking over embedded docs",
     org: "Bosch Global Software Technologies",
     role: "Gen AI Engineer",
     period: "2024 — Present",
@@ -98,7 +103,8 @@ export const MISSIONS: Mission[] = [
   },
   {
     id: "m05",
-    op: "OPERATION: TEST DESIGN",
+    op: "TEST DESIGN ENGINE",
+    short: "Knowledge-graph-backed test design that learns",
     org: "Bosch Global Software Technologies",
     role: "Gen AI Engineer",
     period: "2024 — Present",
@@ -113,7 +119,8 @@ export const MISSIONS: Mission[] = [
   },
   {
     id: "m06",
-    op: "OPERATION: FIRST CONTACT",
+    op: "RELEASE AUTOMATION",
+    short: "Where the embedded domain knowledge came from",
     org: "Bosch Global Software Technologies",
     role: "Project Trainee — Embedded Systems & Test Automation",
     period: "Oct 2022 — May 2023",
@@ -139,6 +146,9 @@ export type Loadout = {
   summary: string;
   detail: string[];
   attrs: { label: string; value: number }[];
+  kind: string;
+  year: string;
+  figures: { value: string; label: string }[];
   stack: string[];
   status: string;
 };
@@ -146,6 +156,9 @@ export type Loadout = {
 export const LOADOUTS: Loadout[] = [
   {
     id: "ai-in-five",
+    kind: "AI Literacy",
+    year: "2026",
+    figures: [{ value: "100+", label: "USERS" }, { value: "50+", label: "RECURRING" }, { value: "5 MIN", label: "TO FIRST INSIGHT" }],
     name: "AI IN FIVE",
     tag: "Shipped · Live",
     tier: "PRIMARY",
@@ -168,6 +181,9 @@ export const LOADOUTS: Loadout[] = [
   },
   {
     id: "ooh",
+    kind: "Marketplace",
+    year: "2024—NOW",
+    figures: [{ value: "~20", label: "DISCOVERY INTERVIEWS" }, { value: "66", label: "FUNCTIONAL REQS" }, { value: "5", label: "PERSONAS" }],
     name: "OOH MARKETPLACE",
     tag: "Founder-mode · Pre-launch",
     tier: "PRIMARY",
@@ -190,6 +206,9 @@ export const LOADOUTS: Loadout[] = [
   },
   {
     id: "mutation-obs",
+    kind: "Observability",
+    year: "2026",
+    figures: [{ value: "7", label: "LIVE SIGNALS" }, { value: "100%", label: "PIPELINE INSTRUMENTED" }, { value: "CI", label: "TRIGGERED" }],
     name: "MUTATION OBSERVABILITY",
     tag: "Bosch · In production",
     tier: "SECONDARY",
@@ -210,6 +229,9 @@ export const LOADOUTS: Loadout[] = [
   },
   {
     id: "sdlc-orchestrator",
+    kind: "Agent Pipeline",
+    year: "2024—NOW",
+    figures: [{ value: "4", label: "AGENT STAGES" }, { value: "1", label: "HUMAN GATE" }, { value: "E2E", label: "DESIGN TO CODE" }],
     name: "AGENTIC SDLC ORCHESTRATOR",
     tag: "Bosch · Internal",
     tier: "SECONDARY",
@@ -229,6 +251,9 @@ export const LOADOUTS: Loadout[] = [
   },
   {
     id: "prompt-library",
+    kind: "Developer Tool",
+    year: "2025",
+    figures: [{ value: "50+", label: "ENGINEERS" }, { value: "-45%", label: "PROMPT ITERATION" }, { value: "1", label: "VS CODE PLUGIN" }],
     name: "PROMPT LIBRARY PLUGIN",
     tag: "Bosch · Shipped",
     tier: "UTILITY",
@@ -310,10 +335,10 @@ export const OFF_DUTY = [
 ];
 
 export const SECTIONS = [
-  { id: "player", label: "PLAYER" },
-  { id: "campaign", label: "CAMPAIGN" },
-  { id: "loadout", label: "LOADOUT" },
-  { id: "armory", label: "ARMORY" },
-  { id: "offduty", label: "OFF-DUTY" },
-  { id: "comms", label: "COMMS" },
+  { id: "intro", label: "INTRO", n: "00" },
+  { id: "work", label: "WORK", n: "01" },
+  { id: "builds", label: "BUILDS", n: "02" },
+  { id: "stack", label: "STACK", n: "03" },
+  { id: "offduty", label: "OFF-DUTY", n: "04" },
+  { id: "contact", label: "CONTACT", n: "05" },
 ];

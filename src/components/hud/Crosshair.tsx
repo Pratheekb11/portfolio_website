@@ -57,7 +57,7 @@ export default function Crosshair() {
 
   const gap = hot ? 13 : 6;
   const len = hot ? 9 : 7;
-  const color = hot ? "var(--signal)" : "var(--sand)";
+  const color = hot ? "var(--blaze)" : "var(--bone)";
 
   return (
     <div
@@ -100,7 +100,7 @@ export default function Crosshair() {
             width: 34,
             height: 34,
             transform: "translate(-50%, -50%)",
-            border: `1px solid ${hot ? "var(--signal)" : "transparent"}`,
+            border: `1px solid ${hot ? "var(--blaze)" : "transparent"}`,
             clipPath:
               "polygon(0 0,10px 0,10px 1px,1px 1px,1px 10px,0 10px,0 0,100% 0,100% 10px,calc(100% - 1px) 10px,calc(100% - 1px) 1px,calc(100% - 10px) 1px,calc(100% - 10px) 0,100% 0,100% 100%,calc(100% - 10px) 100%,calc(100% - 10px) calc(100% - 1px),calc(100% - 1px) calc(100% - 1px),calc(100% - 1px) calc(100% - 10px),100% calc(100% - 10px),100% 100%,0 100%,0 calc(100% - 10px),1px calc(100% - 10px),1px calc(100% - 1px),10px calc(100% - 1px),10px 100%,0 100%)",
             opacity: hot ? 1 : 0,
@@ -121,7 +121,7 @@ export default function Crosshair() {
                 style={{
                   width: 1.5,
                   height: 9,
-                  background: "var(--hud)",
+                  background: "var(--bone)",
                   transformOrigin: "center 20px",
                   transform: `rotate(${deg}deg) translateY(-16px)`,
                 }}

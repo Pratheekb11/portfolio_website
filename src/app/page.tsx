@@ -1,29 +1,27 @@
 import BootSequence from "@/components/hud/BootSequence";
 import Crosshair from "@/components/hud/Crosshair";
 import SmoothScroll from "@/components/hud/SmoothScroll";
-import HudFrame from "@/components/hud/HudFrame";
-import KillFeed from "@/components/hud/KillFeed";
-import Player from "@/components/sections/Player";
-import Campaign from "@/components/sections/Campaign";
-import Loadout from "@/components/sections/Loadout";
-import Armory from "@/components/sections/Armory";
+import Chrome from "@/components/hud/Chrome";
+import Intro from "@/components/sections/Intro";
+import Work from "@/components/sections/Work";
+import Builds from "@/components/sections/Builds";
+import Stack from "@/components/sections/Stack";
 import OffDuty from "@/components/sections/OffDuty";
-import Comms from "@/components/sections/Comms";
+import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
     <BootSequence>
       <SmoothScroll />
       <Crosshair />
-      <HudFrame />
-      <KillFeed />
-      <main className="relative z-10">
-        <Player />
-        <Campaign />
-        <Loadout />
-        <Armory />
+      <Chrome />
+      <main className="relative">
+        <Intro />
+        <Work />
+        <Builds />
+        <Stack />
         <OffDuty />
-        <Comms />
+        <Contact />
       </main>
     </BootSequence>
   );

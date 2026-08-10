@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Chakra_Petch, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Archivo, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const chakra = Chakra_Petch({
-  variable: "--font-chakra",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "600", "800", "900"],
 });
 
 const grotesk = Space_Grotesk({
@@ -30,14 +30,12 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport = { themeColor: "#0B0E14" };
+export const viewport = { themeColor: "#0B0B0C" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${chakra.variable} ${grotesk.variable} ${mono.variable}`}>
-      <body>
-        {children}
-      </body>
+    <html lang="en" className={`${archivo.variable} ${grotesk.variable} ${mono.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
