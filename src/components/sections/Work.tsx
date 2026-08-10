@@ -11,7 +11,7 @@ export default function Work() {
   return (
     <section id="work" className="relative w-full py-20 sm:py-28">
       <div className="shell">
-        <IndexRow n="01" right="WHAT I BUILT AT BOSCH" />
+        <IndexRow n="01" />
 
         <ul className="mt-8 space-y-3 sm:mt-12">
           {MISSIONS.map((m, i) => {
