@@ -10,7 +10,7 @@ export default function Stack() {
   return (
     <section id="stack" className="relative w-full py-20 sm:py-28">
       <div className="shell">
-        <IndexRow n="04" right="WHAT IS IN ROTATION" />
+        <IndexRow n="03" right="WHAT IS IN ROTATION" />
       </div>
 
       <div className="mt-8 sm:mt-12">

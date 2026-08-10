@@ -332,16 +332,29 @@ export const OFF_DUTY = [
     line: "Ninety minutes with no notifications. Still the best debugger I own.",
     color: "var(--pitch)",
   },
+  {
+    id: "running",
+    title: "RUNNING",
+    kind: "SOLO",
+    line: "Long, boring and repetitive on purpose. Most of my design problems get solved somewhere in the middle of a run.",
+    color: "var(--pitch)",
+  },
+  {
+    id: "philosophy",
+    title: "PHILOSOPHY",
+    kind: "READING",
+    line: "German and Greek, mostly. Kant and Nietzsche on one side, the Stoics and Aristotle on the other. Old arguments about how to think clearly, which turns out to be the job.",
+    color: "var(--bone)",
+  },
 ];
 
 export const SECTIONS = [
   { id: "intro", label: "INTRO", n: "00" },
-  { id: "work", label: "EXPERIENCE", n: "01" },
-  { id: "builds", label: "PROJECTS", n: "02" },
-  { id: "product", label: "PRODUCT", n: "03" },
-  { id: "stack", label: "SKILLS", n: "04" },
-  { id: "beyond", label: "BEYOND WORK", n: "05" },
-  { id: "contact", label: "CONTACT", n: "06" },
+  { id: "builds", label: "PROJECTS", n: "01" },
+  { id: "product", label: "PRODUCT", n: "02" },
+  { id: "stack", label: "SKILLS", n: "03" },
+  { id: "beyond", label: "BEYOND WORK", n: "04" },
+  { id: "contact", label: "CONTACT", n: "05" },
 ];
 
 /* The product half of the job, evidenced rather than claimed. */

@@ -1,8 +1,6 @@
 import Chrome from "@/components/hud/Chrome";
-import SideBadge from "@/components/hud/SideBadge";
 import LightBand from "@/components/fx/LightBand";
 import Intro from "@/components/sections/Intro";
-import Work from "@/components/sections/Work";
 import Builds from "@/components/sections/Builds";
 import Product from "@/components/sections/Product";
 import Stack from "@/components/sections/Stack";
@@ -24,11 +22,9 @@ export default function Home() {
   return (
     <>
       <Chrome />
-      <SideBadge />
       <main className="relative">
         <Intro />
         <LightBand items={BAND} />
-        <Work />
         <Builds />
         <Product />
         <Stack />

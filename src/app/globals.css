@@ -119,10 +119,6 @@ body {
 
 .shell { padding-inline: clamp(1rem, 4vw, 3.5rem); }
 
-/* the pinned side badge lives in the right gutter, so keep content clear of it */
-@media (min-width: 1280px) {
-  .shell { padding-right: clamp(5rem, 6vw, 6.5rem); }
-}
 
 /* section index row: 03 ————————— PROOF OF BUILD */
 .index-row {

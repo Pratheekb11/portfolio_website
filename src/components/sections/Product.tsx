@@ -8,7 +8,7 @@ export default function Product() {
   return (
     <section id="product" className="relative w-full py-20 sm:py-28">
       <div className="shell">
-        <IndexRow n="03" right="HOW I DECIDE WHAT TO BUILD" />
+        <IndexRow n="02" right="HOW I DECIDE WHAT TO BUILD" />
 
         <div className="mt-10 grid gap-8 sm:mt-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
           <div className="lg:sticky lg:top-[calc(var(--chrome-top)+3rem)] lg:self-start">

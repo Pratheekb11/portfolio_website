@@ -128,7 +128,7 @@ export default function Builds() {
   return (
     <section id="builds" className="relative w-full py-20 sm:py-28">
       <div className="shell">
-        <IndexRow n="02" right={`${LOADOUTS.length} PROJECTS`} />
+        <IndexRow n="01" right={`${LOADOUTS.length} PROJECTS`} />
       </div>
 
       <div className="mt-8 sm:mt-12">
