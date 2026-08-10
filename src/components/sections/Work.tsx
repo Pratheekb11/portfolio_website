@@ -12,58 +12,62 @@ export default function Work() {
     <section id="work" className="relative w-full py-20 sm:py-28">
       <div className="shell">
         <IndexRow n="01" right="WHAT I BUILT AT BOSCH" />
-      </div>
 
-      <div className="shell mt-10 sm:mt-14">
-        <ul>
+        <ul className="mt-8 space-y-3 sm:mt-12">
           {MISSIONS.map((m, i) => {
             const on = open === m.id;
             return (
               <motion.li
                 key={m.id}
-                initial={{ opacity: 0, y: 26 }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-12%" }}
-                transition={{ duration: 0.6, delay: (i % 3) * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="border-t"
-                style={{ borderColor: "var(--rail)" }}
+                viewport={{ once: true, margin: "-8%" }}
+                transition={{ duration: 0.45, delay: (i % 3) * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="card card-hover overflow-hidden"
+                style={on ? { borderColor: "color-mix(in oklab, var(--blaze) 45%, var(--rail))" } : undefined}
               >
                 <button
                   onClick={() => setOpen(on ? null : m.id)}
                   aria-expanded={on}
-                  className="group flex w-full items-start justify-between gap-6 py-6 text-left sm:items-end sm:py-8"
+                  className="grid w-full grid-cols-1 gap-4 p-5 text-left sm:grid-cols-[8.5rem_1fr_auto] sm:gap-6 sm:p-7"
                   style={{ background: "transparent", border: 0 }}
                 >
-                  <div className="min-w-0">
-                    <span
-                      className="mono block text-[0.625rem] tracking-[0.2em]"
-                      style={{ color: on ? "var(--blaze)" : "var(--ash)" }}
-                    >
+                  <div className="mono flex gap-4 text-[0.625rem] leading-relaxed tracking-[0.16em] sm:flex-col sm:gap-0">
+                    <span style={{ color: on ? "var(--blaze)" : "var(--bone)" }}>
                       {String(i + 1).padStart(3, "0")}
                     </span>
+                    <span style={{ color: "var(--ash)" }}>
+                      {m.period.replace(" to ", " / ").toUpperCase()}
+                    </span>
+                    <span className="hidden sm:inline" style={{ color: "var(--ash)" }}>
+                      BOSCH
+                    </span>
+                  </div>
+
+                  <div className="min-w-0">
                     <h3
-                      className="d mt-2 text-[clamp(1.75rem,6.5vw,4.5rem)] transition-colors duration-300"
+                      className="d text-[clamp(1.5rem,4.6vw,3rem)] transition-colors duration-300"
                       style={{ color: on ? "var(--blaze)" : "var(--bone)" }}
                     >
                       {m.op}
                     </h3>
-                    <p className="serif-it mt-2 text-[0.9375rem] sm:text-[1.0625rem]" style={{ color: "var(--ash)" }}>
+                    <p className="serif-it mt-2 text-[0.9375rem]" style={{ color: "var(--ash)" }}>
                       {m.short}
                     </p>
                   </div>
 
-                  <div className="flex shrink-0 flex-col items-end gap-2 pt-1">
-                    <span className="mono text-[0.6875rem] tracking-[0.14em]" style={{ color: "var(--ash)" }}>
-                      [{m.period.replace(" to ", " / ").replace("Present", "NOW").toUpperCase()}]
-                    </span>
-                    <span
-                      className="d text-[clamp(1.25rem,3.5vw,2.25rem)]"
-                      style={{ color: on ? "var(--bone)" : "var(--ash)" }}
-                    >
+                  <div className="flex shrink-0 items-baseline gap-4 sm:flex-col sm:items-end sm:gap-1">
+                    <span className="d text-[clamp(1.25rem,3vw,2rem)]" style={{ color: "var(--bone)" }}>
                       {m.metric.value}
                     </span>
                     <span className="meta" style={{ fontSize: "0.5625rem" }}>
                       {m.metric.label}
+                    </span>
+                    <span
+                      className="mono ml-auto text-[0.6875rem] sm:ml-0 sm:mt-2"
+                      style={{ color: "var(--blaze)" }}
+                    >
+                      {on ? "CLOSE −" : "DETAIL +"}
                     </span>
                   </div>
                 </button>
@@ -74,40 +78,42 @@ export default function Work() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="grid gap-8 pb-10 lg:grid-cols-3">
-                        {(
-                          [
-                            ["THE FRICTION", m.objective],
-                            ["WHAT I BUILT", m.engagement],
-                            ["WHAT CHANGED", m.outcome],
-                          ] as const
-                        ).map(([k, v], j) => (
-                          <div key={k}>
-                            <div className="flex items-center gap-2">
-                              <span
-                                className="inline-block h-1.5 w-1.5"
-                                style={{ background: j === 2 ? "var(--blaze)" : "var(--rail)" }}
-                              />
-                              <span className="meta">{k}</span>
+                      <div className="border-t px-5 pb-7 pt-6 sm:px-7" style={{ borderColor: "var(--rail)" }}>
+                        <div className="grid gap-7 lg:grid-cols-3">
+                          {(
+                            [
+                              ["THE FRICTION", m.objective],
+                              ["WHAT I BUILT", m.engagement],
+                              ["WHAT CHANGED", m.outcome],
+                            ] as const
+                          ).map(([k, v], j) => (
+                            <div key={k}>
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className="inline-block h-1.5 w-1.5"
+                                  style={{ background: j === 2 ? "var(--blaze)" : "var(--rail)" }}
+                                />
+                                <span className="meta">{k}</span>
+                              </div>
+                              <p
+                                className="mt-3 text-[0.9375rem] leading-relaxed"
+                                style={{ color: j === 0 ? "var(--ash)" : "var(--bone)" }}
+                              >
+                                {v}
+                              </p>
                             </div>
-                            <p
-                              className="mt-3 text-[0.9375rem] leading-relaxed sm:text-[1rem]"
-                              style={{ color: j === 0 ? "var(--ash)" : "var(--bone)" }}
-                            >
-                              {v}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="flex flex-wrap gap-x-6 gap-y-2 pb-10">
-                        {m.stack.map((s) => (
-                          <span key={s} className="meta">
-                            {s}
-                          </span>
-                        ))}
+                          ))}
+                        </div>
+                        <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2">
+                          {m.stack.map((s) => (
+                            <span key={s} className="meta">
+                              {s}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </motion.div>
                   )}
@@ -116,7 +122,6 @@ export default function Work() {
             );
           })}
         </ul>
-        <div className="rule" />
       </div>
     </section>
   );

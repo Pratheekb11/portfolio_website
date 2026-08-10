@@ -50,7 +50,7 @@ export default function Intro() {
           >
             GEN AI ENGINEER
           </p>
-          <p className="meta mt-2">AGENTIC SYSTEMS · LLM INFRASTRUCTURE · RAG AT SCALE</p>
+          <p className="meta mt-2">AGENTIC SYSTEMS · LLM INFRASTRUCTURE · PRODUCT THINKING</p>
         </motion.div>
 
         <div className="sm:text-right">
@@ -85,8 +85,8 @@ export default function Intro() {
             className="mt-6 max-w-md text-[1rem] leading-relaxed sm:ml-auto sm:text-right"
             style={{ color: "var(--ash)" }}
           >
-            I look for the friction before I look for the tool, then ship the fix teams actually
-            keep using.
+            I talk to the people losing time before I open an editor, then ship the fix they
+            actually keep using.
           </motion.p>
 
           <motion.div

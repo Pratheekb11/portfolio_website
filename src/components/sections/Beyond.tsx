@@ -8,7 +8,7 @@ export default function Beyond() {
   return (
     <section id="beyond" className="relative w-full py-20 sm:py-28">
       <div className="shell">
-        <IndexRow n="04" right="AWAY FROM THE EDITOR" />
+        <IndexRow n="05" right="AWAY FROM THE EDITOR" />
 
         <div className="mt-10 grid gap-10 sm:mt-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <h2 className="d text-[clamp(2rem,6vw,4rem)]" style={{ color: "var(--bone)" }}>

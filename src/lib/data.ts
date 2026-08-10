@@ -338,7 +338,36 @@ export const SECTIONS = [
   { id: "intro", label: "INTRO", n: "00" },
   { id: "work", label: "EXPERIENCE", n: "01" },
   { id: "builds", label: "PROJECTS", n: "02" },
-  { id: "stack", label: "SKILLS", n: "03" },
-  { id: "beyond", label: "BEYOND WORK", n: "04" },
-  { id: "contact", label: "CONTACT", n: "05" },
+  { id: "product", label: "PRODUCT", n: "03" },
+  { id: "stack", label: "SKILLS", n: "04" },
+  { id: "beyond", label: "BEYOND WORK", n: "05" },
+  { id: "contact", label: "CONTACT", n: "06" },
+];
+
+/* The product half of the job, evidenced rather than claimed. */
+export const PRODUCT = [
+  {
+    id: "users-first",
+    title: "START WITH THE USER",
+    lead: "Nothing gets built until I understand who is losing time and why.",
+    body:
+      "For the OOH marketplace I ran around 20 structured discovery interviews with advertisers and agencies before writing a line of code. At Bosch, every tool I have shipped started as a complaint someone kept repeating in standups.",
+    figure: { value: "~20", label: "DISCOVERY INTERVIEWS" },
+  },
+  {
+    id: "write-it-down",
+    title: "WRITE IT DOWN FIRST",
+    lead: "If I cannot spec it, I do not understand it yet.",
+    body:
+      "I wrote the full PRD for the marketplace on my own: 11 sections, 5 personas, 66 functional requirements and a C4 architecture. I hold an IREB CPRE certification because requirements work is the part most engineers skip.",
+    figure: { value: "66", label: "FUNCTIONAL REQUIREMENTS" },
+  },
+  {
+    id: "adoption",
+    title: "ADOPTION IS THE SCORE",
+    lead: "Shipping is the halfway mark. People choosing to keep using it is the result.",
+    body:
+      "250+ developers on the instruction-set extension, 50+ on the prompt library, and a 25% lift in AI tool adoption across the org. AI in Five has 100+ users and 50+ who came back, which is the number I actually watch.",
+    figure: { value: "+25%", label: "ORG TOOL ADOPTION" },
+  },
 ];

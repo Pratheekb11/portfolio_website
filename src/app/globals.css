@@ -69,7 +69,29 @@ body {
 /* ---------- structure ---------- */
 .rule { height: 1px; background: var(--rail); }
 
+/* dotted rule, used in the section index rows */
+.rule-dot {
+  height: 1px;
+  background-image: linear-gradient(to right, var(--rail) 0 3px, transparent 3px 8px);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+}
+
+/* every block of content sits in one of these */
+.card {
+  background: var(--coal);
+  border: 1px solid var(--rail);
+  border-radius: 14px;
+}
+.card-hover { transition: border-color 0.25s ease, background-color 0.25s ease; }
+.card-hover:hover { border-color: color-mix(in oklab, var(--blaze) 45%, var(--rail)); }
+
 .shell { padding-inline: clamp(1rem, 4vw, 3.5rem); }
+
+/* the pinned side badge lives in the right gutter, so keep content clear of it */
+@media (min-width: 1280px) {
+  .shell { padding-right: clamp(5rem, 6vw, 6.5rem); }
+}
 
 /* section index row: 03 ————————— PROOF OF BUILD */
 .index-row {

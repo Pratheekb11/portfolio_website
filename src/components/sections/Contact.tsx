@@ -12,7 +12,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative w-full pt-20 sm:pt-28">
       <div className="shell">
-        <IndexRow n="05" right="FOUR WAYS IN" />
+        <IndexRow n="06" right="FOUR WAYS IN" />
 
         <h2
           className="d mt-10 text-[clamp(3rem,15vw,13rem)] sm:mt-14"

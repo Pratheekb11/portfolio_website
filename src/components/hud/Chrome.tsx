@@ -83,11 +83,25 @@ export default function Chrome() {
               <a
                 key={s.id}
                 href={`#${s.id}`}
-                className="mono text-[0.6875rem] tracking-[0.16em] no-underline transition-colors duration-200"
+                className="mono relative text-[0.6875rem] tracking-[0.16em] no-underline transition-colors duration-200"
                 style={{ color: on ? "var(--blaze)" : "var(--ash)" }}
                 aria-current={on ? "true" : undefined}
               >
+                <span
+                  aria-hidden
+                  className="absolute -left-2.5 top-1/2 -translate-y-1/2 transition-opacity duration-200"
+                  style={{ opacity: on ? 1 : 0 }}
+                >
+                  (
+                </span>
                 {s.n}/{s.label}
+                <span
+                  aria-hidden
+                  className="absolute -right-2.5 top-1/2 -translate-y-1/2 transition-opacity duration-200"
+                  style={{ opacity: on ? 1 : 0 }}
+                >
+                  )
+                </span>
               </a>
             );
           })}
