@@ -1,49 +1,5 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { useInView } from "motion/react";
 import { PLAYER } from "@/lib/data";
 import IndexRow from "@/components/ui/IndexRow";
-
-const MESSAGE =
-  "I want the job where a problem shows up vague, I go talk to the people living with it, and then I ship the thing that fixes it. If that's the role you're filling, say hello.";
-
-function Stream({ text }: { text: string }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-15%" });
-  const [out, setOut] = useState("");
-
-  useEffect(() => {
-    if (!inView) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setOut(text);
-      return;
-    }
-    const tokens = text.split(/(\s+)/);
-    let i = 0;
-    const id = setInterval(() => {
-      i += 1;
-      setOut(tokens.slice(0, i).join(""));
-      if (i >= tokens.length) clearInterval(id);
-    }, 30);
-    return () => clearInterval(id);
-  }, [inView, text]);
-
-  return (
-    <p
-      ref={ref}
-      className="serif-it min-h-[7rem] max-w-3xl text-[clamp(1.125rem,2.6vw,1.75rem)] leading-snug"
-      style={{ color: "var(--bone)" }}
-    >
-      {out}
-      {out.length < text.length && (
-        <span className="blink" style={{ color: "var(--blaze)" }}>
-          ▍
-        </span>
-      )}
-    </p>
-  );
-}
 
 const LINKS = [
   { label: "EMAIL", value: PLAYER.email, href: `mailto:${PLAYER.email}` },
@@ -56,7 +12,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative w-full pt-20 sm:pt-28">
       <div className="shell">
-        <IndexRow n="05" right="OPEN TO NEW ROLES" />
+        <IndexRow n="05" right="FOUR WAYS IN" />
 
         <h2
           className="d mt-10 text-[clamp(3rem,15vw,13rem)] sm:mt-14"
@@ -66,18 +22,20 @@ export default function Contact() {
           <span style={{ color: "var(--blaze)" }}> HELLO.</span>
         </h2>
 
-        <div className="mt-10">
-          <Stream text={MESSAGE} />
-        </div>
+        <p
+          className="mt-8 max-w-xl text-[1rem] leading-relaxed"
+          style={{ color: "var(--ash)" }}
+        >
+          Email is the fastest way to reach me. I read everything.
+        </p>
 
-        <ul className="mt-14">
+        <ul className="mt-12">
           {LINKS.map((l) => (
             <li key={l.label} className="border-t" style={{ borderColor: "var(--rail)" }}>
               <a
                 href={l.href}
                 target={l.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noreferrer noopener"
-                data-target
                 className="group flex items-center justify-between gap-6 py-6 no-underline"
               >
                 <span

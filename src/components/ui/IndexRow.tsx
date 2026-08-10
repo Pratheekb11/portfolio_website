@@ -1,4 +1,4 @@
-/** 03 ————————————— PROOF OF BUILD. The rule carries the section number. */
+/** Section number on the left, a rule across, a short label on the right. */
 export default function IndexRow({ n, right }: { n: string; right: string }) {
   return (
     <div className="index-row">

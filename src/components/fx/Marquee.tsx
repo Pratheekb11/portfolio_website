@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 
 /* Full-bleed band of outline type that slides as you pass it.
-   One word per band is filled solid — that's the word that matters. */
+   One word per band is filled solid: the word that carries the section. */
 export default function Marquee({
   text,
   solid,

@@ -95,7 +95,6 @@ export default function Chrome() {
 
         <a
           href="#contact"
-          data-target
           className="mono px-3 py-1.5 text-[0.6875rem] font-bold tracking-[0.16em] no-underline transition-transform duration-200 hover:-translate-y-px"
           style={{ background: "var(--blaze)", color: "var(--void)" }}
         >
@@ -122,7 +121,7 @@ export default function Chrome() {
         </div>
 
         <span className="mono text-[0.625rem] tracking-[0.16em]" style={{ color: "var(--bone)" }}>
-          {active.n} — {active.label}
+          {active.n} / {active.label}
         </span>
 
         <div className="mono flex items-center gap-4 text-[0.625rem] tracking-[0.16em]" style={{ color: "var(--ash)" }}>

@@ -38,8 +38,8 @@ export default function Stack() {
             {PLAYER.bio}
           </p>
           <p className="serif-it mt-4 max-w-sm text-[0.9375rem]" style={{ color: "var(--bone)" }}>
-            Claude Code and Cursor are in my daily loop, and I hold an IREB CPRE certification —
-            the product half of the job is not a side interest.
+            Claude Code and Cursor are in my daily loop, and I hold an IREB CPRE certification.
+            The product half of the job is not a side interest.
           </p>
         </div>
 

@@ -34,7 +34,6 @@ export default function Work() {
                 style={{ borderColor: "var(--rail)" }}
               >
                 <button
-                  data-target
                   onClick={() => setOpen(on ? null : m.id)}
                   aria-expanded={on}
                   className="group flex w-full items-start justify-between gap-6 py-6 text-left sm:items-end sm:py-8"
@@ -60,7 +59,7 @@ export default function Work() {
 
                   <div className="flex shrink-0 flex-col items-end gap-2 pt-1">
                     <span className="mono text-[0.6875rem] tracking-[0.14em]" style={{ color: "var(--ash)" }}>
-                      [{m.period.replace(" — ", "–").replace("Present", "NOW").toUpperCase()}]
+                      [{m.period.replace(" to ", " / ").replace("Present", "NOW").toUpperCase()}]
                     </span>
                     <span
                       className="d text-[clamp(1.25rem,3.5vw,2.25rem)]"
