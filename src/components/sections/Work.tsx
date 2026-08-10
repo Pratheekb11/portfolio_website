@@ -4,7 +4,6 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { MISSIONS } from "@/lib/data";
 import IndexRow from "@/components/ui/IndexRow";
-import Marquee from "@/components/fx/Marquee";
 
 export default function Work() {
   const [open, setOpen] = useState<string | null>(MISSIONS[0].id);
@@ -15,11 +14,7 @@ export default function Work() {
         <IndexRow n="01" right="WHAT I BUILT AT BOSCH" />
       </div>
 
-      <div className="mt-8 sm:mt-12">
-        <Marquee text="SHIPPED IN PRODUCTION" solid="SHIPPED" />
-      </div>
-
-      <div className="shell mt-10 sm:mt-16">
+      <div className="shell mt-10 sm:mt-14">
         <ul>
           {MISSIONS.map((m, i) => {
             const on = open === m.id;
