@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Halftone from "@/components/fx/Halftone";
+import { asset } from "@/lib/asset";
 
 const CHIPS = ["2.5 years in production", "Bengaluru, India", "Bosch Global Software Technologies"];
 
@@ -29,7 +30,7 @@ export default function Intro() {
         transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <Halftone
-          src="/media/player.jpg"
+          src={asset("/media/player.jpg")}
           cell={7}
           shape="square"
           region={[0.46, 0.02, 0.58, 0.98]}

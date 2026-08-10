@@ -5,6 +5,7 @@ import { ARMORY, CREDENTIALS, PLAYER } from "@/lib/data";
 import IndexRow from "@/components/ui/IndexRow";
 import Marquee from "@/components/fx/Marquee";
 import Halftone from "@/components/fx/Halftone";
+import { asset } from "@/lib/asset";
 
 export default function Stack() {
   return (
@@ -24,7 +25,7 @@ export default function Stack() {
             style={{ borderColor: "var(--rail)", background: "var(--pit)" }}
           >
             <Halftone
-              src="/media/player.jpg"
+              src={asset("/media/player.jpg")}
               cell={5}
               mode="duotone"
               fill="var(--blaze)"

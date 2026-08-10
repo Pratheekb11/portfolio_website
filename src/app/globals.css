@@ -54,7 +54,6 @@ body {
   line-height: 0.84;
   text-transform: uppercase;
 }
-.d-thin { font-weight: 400; letter-spacing: -0.02em; }
 
 .meta {
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -120,7 +119,7 @@ body {
 .shell { padding-inline: clamp(1rem, 4vw, 3.5rem); }
 
 
-/* section index row: 03 ————————— PROOF OF BUILD */
+/* section index row: number, rule, label */
 .index-row {
   display: flex;
   align-items: center;

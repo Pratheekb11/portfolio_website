@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { PLAYER } from "@/lib/data";
+import { asset } from "@/lib/asset";
 import IndexRow from "@/components/ui/IndexRow";
 import Scramble from "@/components/ui/Scramble";
 
@@ -9,7 +10,7 @@ const LINKS = [
   { label: "EMAIL", value: PLAYER.email, href: `mailto:${PLAYER.email}` },
   { label: "LINKEDIN", value: "in/bpratheek", href: PLAYER.linkedin },
   { label: "GITHUB", value: "Pratheekb11", href: PLAYER.github },
-  { label: "RESUME", value: "One page, PDF", href: "/media/Pratheek_B_Resume.pdf" },
+  { label: "RESUME", value: "One page, PDF", href: asset("/media/Pratheek_B_Resume.pdf") },
 ];
 
 export default function Contact() {
