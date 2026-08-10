@@ -1,0 +1,319 @@
+export const PLAYER = {
+  handle: "PRATHEEK B",
+  callsign: "pratheek",
+  class: "GEN AI ENGINEER",
+  spec: "Agentic systems · LLM infrastructure",
+  location: "Bengaluru, IN",
+  email: "bpratheek633@gmail.com",
+  linkedin: "https://linkedin.com/in/bpratheek",
+  github: "https://github.com/Pratheekb11",
+  bio:
+    "I look for the friction before I look for the tool. Inconsistent agent outputs, slow doc search, messy design-to-code handoffs — I find where teams lose time, then ship the fix they actually keep using.",
+  // headline numbers, verified against the CV
+  stats: [
+    { label: "DEVS SERVED", value: 250, suffix: "+", note: "VS Code extension installs" },
+    { label: "OEM PROGRAMS", value: 10, suffix: "", note: "production deployments" },
+    { label: "QUERIES / WK", value: 500, suffix: "+", note: "live RAG pipeline" },
+    { label: "TOOL ADOPTION", value: 25, suffix: "%", note: "org-wide lift, Q1–Q2 2026" },
+  ],
+};
+
+export type Mission = {
+  id: string;
+  op: string;
+  org: string;
+  role: string;
+  period: string;
+  status: "ACTIVE" | "COMPLETE";
+  objective: string;
+  engagement: string;
+  outcome: string;
+  metric: { value: string; label: string };
+  stack: string[];
+};
+
+/* Experience reads as mission briefings because the source material already
+   has that shape: a friction point, the thing built, the measured result. */
+export const MISSIONS: Mission[] = [
+  {
+    id: "m01",
+    op: "OPERATION: SHARED CONTEXT",
+    org: "Bosch Global Software Technologies",
+    role: "Gen AI Engineer",
+    period: "Jan 2024 — Present",
+    status: "ACTIVE",
+    objective:
+      "Engineers across teams were getting inconsistent Copilot completions. The agents had no shared context on team-specific conventions.",
+    engagement:
+      "Built and shipped a VS Code extension that auto-fetches domain-specific instruction sets at the point of use, so every agent starts from the same ground truth.",
+    outcome:
+      "250+ developers on it. Prompt consistency up 90%, agent output accuracy up 50%.",
+    metric: { value: "250+", label: "DEVELOPERS" },
+    stack: ["VS Code API", "TypeScript", "Azure OpenAI"],
+  },
+  {
+    id: "m02",
+    op: "OPERATION: HANDOFF",
+    org: "Bosch Global Software Technologies",
+    role: "Gen AI Engineer",
+    period: "2024 — Present",
+    status: "ACTIVE",
+    objective:
+      "Design, code and test handoffs moved slowly and inconsistently between teams. Review was the bottleneck nobody owned.",
+    engagement:
+      "Built a multi-agent SDLC system — Code Review Assist, Design Assist, Unit Test Assist — with human-in-the-loop checkpoints at each gate.",
+    outcome: "Manual review effort down 35% for adopting teams.",
+    metric: { value: "-35%", label: "REVIEW EFFORT" },
+    stack: ["LangChain", "LangGraph", "Azure OpenAI"],
+  },
+  {
+    id: "m03",
+    op: "OPERATION: LONG MEMORY",
+    org: "Bosch Global Software Technologies",
+    role: "Gen AI Engineer",
+    period: "2024 — Present",
+    status: "ACTIVE",
+    objective:
+      "Long multi-agent chains kept losing context between steps. Agents acted on stale information and nobody could tell where the drift started.",
+    engagement:
+      "Designed a layered memory architecture: an immutable intent layer, an append-only decisions log, and delta tracking with reasoning provenance.",
+    outcome: "Context-drift errors down 40%, and every decision is now traceable to its source step.",
+    metric: { value: "-40%", label: "DRIFT ERRORS" },
+    stack: ["Provenance graph", "LangGraph", "Vector DB"],
+  },
+  {
+    id: "m04",
+    op: "OPERATION: DEEP INDEX",
+    org: "Bosch Global Software Technologies",
+    role: "Gen AI Engineer",
+    period: "2024 — Present",
+    status: "ACTIVE",
+    objective:
+      "Engineers burned hours hunting through scattered embedded-software documentation, context-switching the whole way.",
+    engagement:
+      "Deployed a production RAG pipeline — chunking, retrieval, reranking — on Azure OpenAI and vector databases, exposed over REST so any internal tool can call it.",
+    outcome: "Manual search time down 40%. Handles 500+ queries a week in production.",
+    metric: { value: "500+", label: "QUERIES / WEEK" },
+    stack: ["RAG", "Reranking", "FastAPI", "Vector DB"],
+  },
+  {
+    id: "m05",
+    op: "OPERATION: TEST DESIGN",
+    org: "Bosch Global Software Technologies",
+    role: "Gen AI Engineer",
+    period: "2024 — Present",
+    status: "ACTIVE",
+    objective:
+      "Manual test design was slow, and quality depended on which reviewer you drew.",
+    engagement:
+      "Built a knowledge-graph-backed LLM framework for automated test design, with memory and feedback loops that learn from each review round.",
+    outcome: "Test design accuracy up 30% across iterations.",
+    metric: { value: "+30%", label: "DESIGN ACCURACY" },
+    stack: ["Knowledge Graphs", "LLM feedback loops", "Python"],
+  },
+  {
+    id: "m06",
+    op: "OPERATION: FIRST CONTACT",
+    org: "Bosch Global Software Technologies",
+    role: "Project Trainee — Embedded Systems & Test Automation",
+    period: "Oct 2022 — May 2023",
+    status: "COMPLETE",
+    objective:
+      "Release testing for embedded targets was manual and repeated every cycle.",
+    engagement:
+      "Automated 300+ release test cases in Python and Perl against real embedded hardware.",
+    outcome:
+      "The embedded domain knowledge from this run is exactly what made the later RAG and test-design work land with engineers.",
+    metric: { value: "300+", label: "TESTS AUTOMATED" },
+    stack: ["Python", "Perl", "Embedded"],
+  },
+];
+
+export type Loadout = {
+  id: string;
+  name: string;
+  tag: string;
+  tier: "PRIMARY" | "SECONDARY" | "UTILITY";
+  live?: string;
+  shot?: string;
+  summary: string;
+  detail: string[];
+  attrs: { label: string; value: number }[];
+  stack: string[];
+  status: string;
+};
+
+export const LOADOUTS: Loadout[] = [
+  {
+    id: "ai-in-five",
+    name: "AI IN FIVE",
+    tag: "Shipped · Live",
+    tier: "PRIMARY",
+    live: "https://ai-in-five.vercel.app/",
+    shot: "/media/ai-in-five.jpg",
+    summary:
+      "Most people use a language model daily and have never seen what it does while it answers. So I made them play against one first.",
+    detail: [
+      "One five-minute game against a real model (DistilGPT-2, read directly), then six short chapters if you want them.",
+      "100+ users with 50+ returning — the retention half is the number that matters.",
+      "Nothing to sign up for. You play first, you read afterwards.",
+    ],
+    attrs: [
+      { label: "USERS", value: 78 },
+      { label: "RETENTION", value: 88 },
+      { label: "SHIP SPEED", value: 92 },
+    ],
+    stack: ["Next.js", "LLM APIs", "Vercel"],
+    status: "100+ users · 50+ recurring",
+  },
+  {
+    id: "ooh",
+    name: "OOH MARKETPLACE",
+    tag: "Founder-mode · Pre-launch",
+    tier: "PRIMARY",
+    live: "https://adspace-ooh.vercel.app/",
+    shot: "/media/ooh.jpg",
+    summary:
+      "Advertisers and agencies had no straightforward way to discover and book out-of-home ad space. So I built the marketplace.",
+    detail: [
+      "Ran ~20 structured discovery interviews to validate the pain before writing a line of code.",
+      "Wrote the full PRD solo: 11 sections, 5 personas, 66 functional requirements, C4 architecture.",
+      "Then built it full stack — FastAPI backend, React/Vite frontend — moving between the two as the problem demanded.",
+    ],
+    attrs: [
+      { label: "DISCOVERY", value: 95 },
+      { label: "FULL STACK", value: 85 },
+      { label: "SCOPE", value: 90 },
+    ],
+    stack: ["FastAPI", "React", "Vite", "PRD / C4"],
+    status: "Iterating toward MVP",
+  },
+  {
+    id: "mutation-obs",
+    name: "MUTATION OBSERVABILITY",
+    tag: "Bosch · In production",
+    tier: "SECONDARY",
+    summary:
+      "Test engineers had no way to tell whether LLM-generated mutants improved real test quality or just added noise.",
+    detail: [
+      "Observability dashboard on Grafana + Prometheus, backed by OpenTelemetry.",
+      "Surfaces token spend, latency, mutation bias, coverage, an LLM trust score, and LLM-as-judge recommendations.",
+      "Full pipeline instrumented: check-in triggers GitHub Actions, compiles, generates mutants via the Claude API, runs G-Test, logs back.",
+    ],
+    attrs: [
+      { label: "SIGNAL", value: 90 },
+      { label: "AUTOMATION", value: 88 },
+      { label: "DEPTH", value: 82 },
+    ],
+    stack: ["Grafana", "Prometheus", "OpenTelemetry", "GitHub Actions"],
+    status: "Live pipeline",
+  },
+  {
+    id: "sdlc-orchestrator",
+    name: "AGENTIC SDLC ORCHESTRATOR",
+    tag: "Bosch · Internal",
+    tier: "SECONDARY",
+    summary:
+      "Closes the gap between a design doc and shipped code — design ingestion through code generation, unit testing, and a human review gate.",
+    detail: [
+      "End-to-end multi-agent pipeline with custom orchestration logic.",
+      "Human review is a gate, not an afterthought.",
+    ],
+    attrs: [
+      { label: "ORCHESTRATION", value: 92 },
+      { label: "COVERAGE", value: 80 },
+      { label: "AUTONOMY", value: 75 },
+    ],
+    stack: ["LangChain", "Azure OpenAI", "Custom orchestration"],
+    status: "Running across teams",
+  },
+  {
+    id: "prompt-library",
+    name: "PROMPT LIBRARY PLUGIN",
+    tag: "Bosch · Shipped",
+    tier: "UTILITY",
+    summary:
+      "Traced recurring complaints about bad LLM output quality back to the real cause: everyone was writing their own prompts from scratch.",
+    detail: [
+      "VS Code plugin adopted by 50+ engineers across the org.",
+      "Prompt iteration time down 45%.",
+    ],
+    attrs: [
+      { label: "ADOPTION", value: 76 },
+      { label: "TIME SAVED", value: 85 },
+      { label: "SIMPLICITY", value: 94 },
+    ],
+    stack: ["VS Code API", "TypeScript"],
+    status: "50+ engineers",
+  },
+];
+
+export const ARMORY: { group: string; accent: string; items: string[] }[] = [
+  {
+    group: "AI-NATIVE BUILDING",
+    accent: "var(--signal)",
+    items: [
+      "Claude Code", "Cursor", "Agent orchestration", "MCP servers",
+      "Skills-based workflows", "LangChain", "LangGraph", "Copilot Agents",
+      "Prompt engineering at scale",
+    ],
+  },
+  {
+    group: "ENGINEERING",
+    accent: "var(--comms)",
+    items: [
+      "Python", "FastAPI", "React / Vite", "REST APIs", "RAG",
+      "Knowledge Graphs", "Vector DBs", "Azure OpenAI", "AWS Bedrock",
+      "Docker", "CI/CD", "Git", "Grafana", "Prometheus", "OpenTelemetry",
+    ],
+  },
+  {
+    group: "PRODUCT",
+    accent: "var(--sand)",
+    items: [
+      "Customer discovery", "PRD authoring", "IREB CPRE", "Prototyping",
+      "Shipping solo projects", "Driving adoption",
+    ],
+  },
+];
+
+export const CREDENTIALS = [
+  { name: "IREB CPRE Foundation Level", meta: "Apr 2026" },
+  { name: "Microsoft Azure AI Fundamentals (AZ-900)", meta: "Certified" },
+  { name: "ISTQB CTFL", meta: "Certified" },
+  { name: "ISTQB Automotive Tester", meta: "Certified" },
+  { name: "B.Tech, Electrical & Electronics — REVA University", meta: "2019–2023 · CGPA 8.6" },
+];
+
+export const OFF_DUTY = [
+  {
+    id: "cs",
+    title: "COUNTER-STRIKE",
+    kind: "TACTICAL",
+    line: "Utility, timing, and knowing when not to take the fight. Same job as system design, faster clock.",
+    color: "var(--signal)",
+  },
+  {
+    id: "cod",
+    title: "CALL OF DUTY",
+    kind: "PACE",
+    line: "For the days when the answer is just: move faster, aim better, stop overthinking it.",
+    color: "var(--frag)",
+  },
+  {
+    id: "soccer",
+    title: "SOCCER — IRL",
+    kind: "OFFLINE",
+    line: "Ninety minutes with no notifications. Best debugger I own.",
+    color: "var(--pitch)",
+  },
+];
+
+export const SECTIONS = [
+  { id: "player", label: "PLAYER" },
+  { id: "campaign", label: "CAMPAIGN" },
+  { id: "loadout", label: "LOADOUT" },
+  { id: "armory", label: "ARMORY" },
+  { id: "offduty", label: "OFF-DUTY" },
+  { id: "comms", label: "COMMS" },
+];
