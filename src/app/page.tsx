@@ -1,4 +1,5 @@
 import Chrome from "@/components/hud/Chrome";
+import Motion from "@/components/fx/Motion";
 import LightBand from "@/components/fx/LightBand";
 import Intro from "@/components/sections/Intro";
 import Builds from "@/components/sections/Builds";
@@ -20,7 +21,7 @@ const BAND = [
 
 export default function Home() {
   return (
-    <>
+    <Motion>
       <Chrome />
       <main className="relative">
         <Intro />
@@ -31,6 +32,6 @@ export default function Home() {
         <Beyond />
         <Contact />
       </main>
-    </>
+    </Motion>
   );
 }

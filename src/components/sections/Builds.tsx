@@ -6,6 +6,7 @@ import { LOADOUTS, type Loadout } from "@/lib/data";
 import IndexRow from "@/components/ui/IndexRow";
 import Magnetic from "@/components/ui/Magnetic";
 import Marquee from "@/components/fx/Marquee";
+import useMedia from "@/components/ui/useMedia";
 
 function Corner({ className }: { className: string }) {
   return (
@@ -24,21 +25,29 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.965]);
   const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.45]);
 
+  // On a phone a card is taller than the screen, so stacking them stickily
+  // hides their own bottom half. Below lg they are plain stacked cards.
+  const stack = useMedia("(min-width: 1024px)");
+
   return (
-    <div ref={ref} className="relative pb-4" style={{ minHeight: last ? undefined : "min(94svh, 46rem)" }}>
+    <div
+      ref={ref}
+      className="relative pb-4 sm:pb-5"
+      style={{ minHeight: stack && !last ? "min(94svh, 46rem)" : undefined }}
+    >
       <motion.article
         style={{
-          top: `calc(var(--chrome-top) + 1rem + ${i * 8}px)`,
-          ...(last ? {} : { scale, opacity }),
+          ...(stack ? { top: `calc(var(--chrome-top) + 1rem + ${i * 8}px)` } : {}),
+          ...(stack && !last ? { scale, opacity } : {}),
         }}
-        className="card sticky overflow-hidden"
+        className={`card overflow-hidden ${stack ? "sticky" : ""}`}
       >
         <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
-          <div className="p-6 sm:p-9">
+          <div className="p-5 sm:p-9">
             <p className="serif-it text-[0.9375rem]" style={{ color: "var(--ash)" }}>
               {item.kind} · {item.year}
             </p>
-            <h3 className="d mt-3 text-[clamp(1.75rem,5vw,3.5rem)]" style={{ color: "var(--blaze)" }}>
+            <h3 className="d mt-2.5 text-[clamp(1.625rem,7vw,3.5rem)]" style={{ color: "var(--blaze)" }}>
               {item.name}
             </h3>
             <p
@@ -48,7 +57,7 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
               {item.summary}
             </p>
 
-            <ul className="mt-5 space-y-2.5">
+            <ul className="mt-5 space-y-3">
               {item.detail.map((d) => (
                 <li key={d} className="flex gap-3 text-[0.9375rem] leading-relaxed" style={{ color: "var(--ash)" }}>
                   <span className="mt-2 inline-block h-1 w-1 shrink-0" style={{ background: "var(--blaze)" }} />
@@ -57,10 +66,10 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
               ))}
             </ul>
 
-            <div className="mt-8 flex flex-wrap gap-x-9 gap-y-5">
+            <div className="mt-7 flex flex-wrap gap-x-8 gap-y-5 sm:mt-8 sm:gap-x-9">
               {item.figures.map((f) => (
                 <div key={f.label}>
-                  <div className="d text-[clamp(1.5rem,3.6vw,2.5rem)]" style={{ color: "var(--blaze)" }}>
+                  <div className="d text-[clamp(1.5rem,6vw,2.5rem)]" style={{ color: "var(--blaze)" }}>
                     {f.value}
                   </div>
                   <div className="meta mt-1">{f.label}</div>
@@ -68,14 +77,14 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
               ))}
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 sm:mt-8">
               {item.live ? (
                 <Magnetic>
                   <a
                     href={item.live}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="mono inline-block px-4 py-2.5 text-[0.6875rem] font-bold tracking-[0.16em] no-underline transition-opacity duration-200 hover:opacity-85"
+                    className="mono inline-flex min-h-[2.75rem] items-center px-5 text-[0.6875rem] font-bold tracking-[0.16em] no-underline transition-opacity duration-200 hover:opacity-85 sm:min-h-[2.5rem] sm:px-4"
                     style={{ background: "var(--blaze)", color: "var(--void)", borderRadius: 6 }}
                   >
                     Open live site →
@@ -89,7 +98,7 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
           </div>
 
           <div
-            className="relative flex items-center border-t p-4 sm:p-6 lg:border-l lg:border-t-0"
+            className="relative flex items-center border-t p-3 sm:p-6 lg:border-l lg:border-t-0"
             style={{ borderColor: "var(--rail)" }}
           >
             <Corner className="left-6 top-8 border-l border-t" />
@@ -129,7 +138,11 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
 
 export default function Builds() {
   return (
-    <section id="builds" className="relative w-full py-20 sm:py-28">
+    <section id="builds" className="relative w-full py-14 sm:py-28">
+      {/* the section title is drawn by the marquee, which is decorative;
+          this keeps the heading outline unbroken for screen readers */}
+      <h2 className="sr-only">Things I made</h2>
+
       <div className="shell">
         <IndexRow n="01" right={`${LOADOUTS.length} PROJECTS`} />
       </div>

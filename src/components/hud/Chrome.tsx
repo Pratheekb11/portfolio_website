@@ -30,11 +30,21 @@ export default function Chrome() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setScrl(max > 0 ? window.scrollY / max : 0);
     };
-    const onMove = (e: PointerEvent) => setCrsr(e.clientY / window.innerHeight);
+    // pointermove fires far faster than the readout changes; keep one update
+    // per frame so the bars do not re-render on every mouse pixel
+    let frame = 0;
+    const onMove = (e: PointerEvent) => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        setCrsr(e.clientY / window.innerHeight);
+      });
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => {
+      if (frame) cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("pointermove", onMove);
     };
@@ -62,7 +72,7 @@ export default function Chrome() {
   return (
     <>
       <header
-        className="shell fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-4 border-b"
+        className="shell fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-3 border-b sm:gap-4"
         style={{
           height: "var(--chrome-top)",
           borderColor: "var(--rail)",
@@ -70,14 +80,14 @@ export default function Chrome() {
           backdropFilter: "blur(12px)",
         }}
       >
-        <a href="#intro" className="flex items-baseline gap-2 no-underline">
-          <span className="d text-[0.9375rem]" style={{ color: "var(--bone)" }}>
+        <a href="#intro" className="flex shrink-0 items-baseline gap-2 whitespace-nowrap py-2 no-underline">
+          <span className="d text-[0.875rem] sm:text-[0.9375rem]" style={{ color: "var(--bone)" }}>
             PRATHEEK B.
           </span>
           <span className="meta hidden sm:inline">PORTFOLIO/2026</span>
         </a>
 
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Sections">
+        <nav className="hidden items-center gap-6 lg:flex" aria-label="Sections">
           {SECTIONS.slice(1).map((s) => {
             const on = active.id === s.id;
             return (
@@ -120,7 +130,7 @@ export default function Chrome() {
         <Magnetic strength={0.35}>
           <a
             href="#contact"
-            className="mono inline-block px-3 py-1.5 text-[0.6875rem] font-bold tracking-[0.16em] no-underline"
+            className="mono inline-flex min-h-[2.25rem] items-center whitespace-nowrap px-3 text-[0.625rem] font-bold tracking-[0.12em] no-underline sm:min-h-[2.125rem] sm:text-[0.6875rem] sm:tracking-[0.16em]"
             style={{ background: "var(--blaze)", color: "var(--void)" }}
           >
             GET IN TOUCH
@@ -129,7 +139,7 @@ export default function Chrome() {
       </header>
 
       <footer
-        className="shell fixed inset-x-0 bottom-0 z-50 flex items-center justify-between gap-4 border-t"
+        className="shell fixed inset-x-0 bottom-0 z-50 flex items-center justify-between gap-2 border-t sm:gap-4"
         style={{
           height: "var(--chrome-bot)",
           borderColor: "var(--rail)",
@@ -137,8 +147,8 @@ export default function Chrome() {
           backdropFilter: "blur(12px)",
         }}
       >
-        <div className="mono flex items-center gap-4 text-[0.625rem] tracking-[0.16em]" style={{ color: "var(--ash)" }}>
-          <span>
+        <div className="mono flex items-center gap-4 text-[0.5625rem] tracking-[0.12em] sm:text-[0.625rem] sm:tracking-[0.16em]" style={{ color: "var(--ash)" }}>
+          <span className="hidden min-[360px]:inline">
             SCRL <span style={{ color: "var(--bone)" }}>{scrl.toFixed(2)}</span>
           </span>
           <span className="hidden sm:inline">
@@ -146,7 +156,7 @@ export default function Chrome() {
           </span>
         </div>
 
-        <span className="mono text-[0.625rem] tracking-[0.16em]" style={{ color: "var(--bone)" }}>
+        <span className="mono text-[0.5625rem] tracking-[0.12em] sm:text-[0.625rem] sm:tracking-[0.16em]" style={{ color: "var(--bone)" }}>
           {active.n} / {active.label}
         </span>
 
@@ -155,7 +165,7 @@ export default function Chrome() {
           className="absolute inset-x-0 bottom-0 h-[2px] origin-left"
           style={{ background: "var(--blaze)", transform: `scaleX(${scrl})` }}
         />
-        <div className="mono flex items-center gap-4 text-[0.625rem] tracking-[0.16em]" style={{ color: "var(--ash)" }}>
+        <div className="mono flex items-center gap-4 text-[0.5625rem] tracking-[0.12em] sm:text-[0.625rem] sm:tracking-[0.16em]" style={{ color: "var(--ash)" }}>
           <span className="hidden items-center gap-1.5 sm:flex">
             ACCENT
             <span className="inline-block h-2.5 w-2.5" style={{ background: "var(--blaze)" }} />

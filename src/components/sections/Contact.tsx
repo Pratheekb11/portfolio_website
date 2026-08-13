@@ -18,6 +18,9 @@ export default function Contact() {
 
   const copyEmail = async (e: React.MouseEvent) => {
     if (!navigator.clipboard) return; // let the mailto through
+    // on a phone, tapping EMAIL should open the mail app; copying is a
+    // desktop convenience where there may be no mail client at all
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     e.preventDefault();
     await navigator.clipboard.writeText(PLAYER.email);
     setCopied(true);
@@ -25,12 +28,12 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative w-full pt-20 sm:pt-28">
+    <section id="contact" className="relative w-full pt-14 sm:pt-28">
       <div className="shell">
         <IndexRow n="05" right="FOUR WAYS IN" />
 
         <h2
-          className="d mt-10 text-[clamp(3rem,15vw,13rem)] sm:mt-14"
+          className="d mt-8 text-[clamp(2.75rem,15vw,13rem)] sm:mt-14"
           style={{ color: "var(--bone)" }}
         >
           <Scramble text="SAY" speed={60} />
@@ -41,13 +44,13 @@ export default function Contact() {
         </h2>
 
         <p
-          className="mt-8 max-w-xl text-[1rem] leading-relaxed"
+          className="mt-6 max-w-xl text-[1rem] leading-relaxed sm:mt-8"
           style={{ color: "var(--ash)" }}
         >
           Email is the fastest way to reach me. I read everything.
         </p>
 
-        <ul className="mt-12 space-y-3">
+        <ul className="mt-9 space-y-3 sm:mt-12">
           {LINKS.map((l) => (
             <li key={l.label} className="card card-invert overflow-hidden">
               <a
@@ -55,12 +58,22 @@ export default function Contact() {
                 target={l.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noreferrer noopener"
                 onClick={l.label === "EMAIL" ? copyEmail : undefined}
-                className="group flex items-center justify-between gap-6 px-6 py-5 no-underline sm:px-8 sm:py-6"
+                className="group flex items-center justify-between gap-4 px-5 py-4 no-underline sm:gap-6 sm:px-8 sm:py-6"
               >
-                <span className="d text-[clamp(1.5rem,5vw,3.25rem)]" style={{ color: "var(--c-title)" }}>
-                  {l.label}
+                {/* on a phone the value goes under the label instead of
+                    disappearing, so the address is actually readable */}
+                <span className="min-w-0">
+                  <span className="d block text-[clamp(1.375rem,7vw,3.25rem)]" style={{ color: "var(--c-title)" }}>
+                    {l.label}
+                  </span>
+                  <span
+                    className="mono mt-1 block truncate text-[0.75rem] sm:hidden"
+                    style={{ color: "var(--c-body)" }}
+                  >
+                    {l.label === "EMAIL" && copied ? "Copied to clipboard" : l.value}
+                  </span>
                 </span>
-                <span className="flex items-center gap-5">
+                <span className="flex shrink-0 items-center gap-5">
                   <span className="mono hidden text-[0.8125rem] sm:inline" style={{ color: "var(--c-body)" }}>
                     {l.label === "EMAIL" && copied ? "Copied to clipboard" : l.value}
                   </span>
@@ -76,7 +89,7 @@ export default function Contact() {
           ))}
         </ul>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 py-8">
+        <div className="flex flex-wrap items-center justify-between gap-2 py-8">
           <span className="meta">BUILT BY PRATHEEK B · NEXT.JS · 2026</span>
           <span className="meta">BENGALURU, INDIA</span>
         </div>

@@ -14,7 +14,7 @@ export default function LightBand({ items }: { items: string[] }) {
     <span key={key} className="flex shrink-0 items-center">
       {items.map((it, i) => (
         <span key={`${key}-${i}`} className="flex items-center">
-          <span className="d px-7 text-[clamp(1.125rem,2.4vw,1.75rem)] sm:px-10">{it}</span>
+          <span className="d px-5 text-[clamp(1rem,4vw,1.75rem)] sm:px-10">{it}</span>
           <span
             aria-hidden
             className="h-1.5 w-1.5 rotate-45"
@@ -26,7 +26,7 @@ export default function LightBand({ items }: { items: string[] }) {
   );
 
   return (
-    <div ref={ref} className="w-full overflow-hidden py-7 sm:py-9" style={{ background: "#ECE9E4" }}>
+    <div ref={ref} className="w-full overflow-hidden py-5 sm:py-9" style={{ background: "#ECE9E4" }}>
       <motion.div style={{ x, color: "#0B0B0C" }} className="flex w-max items-center whitespace-nowrap">
         {run("a")}
         {run("b")}

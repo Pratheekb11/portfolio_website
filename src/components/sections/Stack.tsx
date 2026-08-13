@@ -9,7 +9,9 @@ import { asset } from "@/lib/asset";
 
 export default function Stack() {
   return (
-    <section id="stack" className="relative w-full py-20 sm:py-28">
+    <section id="stack" className="relative w-full py-14 sm:py-28">
+      <h2 className="sr-only">The tools I keep</h2>
+
       <div className="shell">
         <IndexRow n="03" right="WHAT IS IN ROTATION" />
       </div>
@@ -18,10 +20,10 @@ export default function Stack() {
         <Marquee text="THE TOOLS I KEEP" solid="TOOLS" speed={300} />
       </div>
 
-      <div className="shell mt-10 grid gap-12 sm:mt-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div className="shell mt-8 grid gap-9 sm:mt-16 sm:gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <div>
           <div
-            className="relative aspect-[4/5] w-full max-w-sm overflow-hidden border"
+            className="relative aspect-[4/5] w-full max-w-[16rem] overflow-hidden border sm:max-w-sm"
             style={{ borderColor: "var(--rail)", background: "var(--pit)" }}
           >
             <Halftone
@@ -53,11 +55,11 @@ export default function Stack() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-12%" }}
               transition={{ duration: 0.6, delay: gi * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="border-t py-7"
+              className="border-t py-6 sm:py-7"
               style={{ borderColor: "var(--rail)" }}
             >
               <div className="flex items-baseline justify-between gap-4">
-                <h3 className="d text-[clamp(1.25rem,3.4vw,2.25rem)]" style={{ color: "var(--bone)" }}>
+                <h3 className="d text-[clamp(1.375rem,6vw,2.25rem)]" style={{ color: "var(--bone)" }}>
                   {g.group}
                 </h3>
                 <span className="mono text-[0.6875rem]" style={{ color: "var(--ash)" }}>
@@ -80,9 +82,9 @@ export default function Stack() {
             </motion.div>
           ))}
 
-          <div className="border-t py-7" style={{ borderColor: "var(--rail)" }}>
+          <div className="border-t py-6 sm:py-7" style={{ borderColor: "var(--rail)" }}>
             <div className="flex items-baseline justify-between gap-4">
-              <h3 className="d text-[clamp(1.25rem,3.4vw,2.25rem)]" style={{ color: "var(--bone)" }}>
+              <h3 className="d text-[clamp(1.375rem,6vw,2.25rem)]" style={{ color: "var(--bone)" }}>
                 CREDENTIALS
               </h3>
               <span className="mono text-[0.6875rem]" style={{ color: "var(--ash)" }}>

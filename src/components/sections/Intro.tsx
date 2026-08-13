@@ -38,10 +38,19 @@ export default function Intro() {
           focus={[0.77, 0.45]}
           falloff={0.44}
           baseline={0.075}
-          className="h-full w-full opacity-70 sm:opacity-100"
+          className="h-full w-full opacity-80 sm:opacity-100"
+        />
+        {/* phone: the portrait sits behind the type, so it needs a heavier
+            scrim from the bottom up. wide: the original left-side wash. */}
+        <div
+          className="absolute inset-0 sm:hidden"
+          style={{
+            background:
+              "linear-gradient(to top, var(--void) 16%, color-mix(in oklab, var(--void) 78%, transparent) 40%, transparent 72%), linear-gradient(to bottom, var(--void) 2%, transparent 14%)",
+          }}
         />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden sm:block"
           style={{
             background:
               "linear-gradient(to right, var(--void) 4%, transparent 58%), linear-gradient(to bottom, var(--void) 1%, transparent 12%)",
@@ -49,10 +58,10 @@ export default function Intro() {
         />
       </motion.div>
 
-      <div className="shell relative flex w-full flex-col justify-between py-10 sm:py-14">
+      <div className="shell relative flex w-full flex-col justify-between py-8 sm:py-14">
         <motion.div custom={0} variants={rise} initial="hidden" animate="shown" className="">
           <p
-            className="d text-[clamp(1.125rem,2.4vw,1.625rem)]"
+            className="d text-[clamp(1.125rem,min(4.6vw,4.4vh),1.625rem)]"
             style={{ color: "var(--bone)", letterSpacing: "0.01em", fontWeight: 600 }}
           >
             GEN AI ENGINEER
@@ -61,7 +70,9 @@ export default function Intro() {
         </motion.div>
 
         <div>
-          <h1 className="d select-none text-[clamp(3rem,10vw,8.5rem)]">
+          {/* the name is capped by viewport height too, so a phone held
+              sideways does not get a headline taller than the screen */}
+          <h1 className="d select-none" style={{ fontSize: "clamp(2.5rem, min(13vw, 20vh), 8.5rem)" }}>
             <span className="block overflow-hidden pb-[0.04em]">
               {"PRATHEEK".split("").map((ch, i) => (
                 <motion.span
@@ -97,7 +108,7 @@ export default function Intro() {
             variants={rise}
             initial="hidden"
             animate="shown"
-            className="mt-6 max-w-md text-[1rem] leading-relaxed"
+            className="mt-5 max-w-md text-[0.9375rem] leading-relaxed sm:mt-6 sm:text-[1rem]"
             style={{ color: "var(--ash)" }}
           >
             I talk to the people losing time before I open an editor, then ship the fix they
@@ -109,7 +120,7 @@ export default function Intro() {
             variants={rise}
             initial="hidden"
             animate="shown"
-            className="mt-7 flex flex-wrap gap-x-7 gap-y-2.5"
+            className="mt-6 flex flex-wrap gap-x-6 gap-y-2.5 sm:mt-7 sm:gap-x-7"
           >
             {CHIPS.map((c) => (
               <span key={c} className="meta flex items-center gap-2.5" style={{ textTransform: "none" }}>

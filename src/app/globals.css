@@ -30,11 +30,27 @@
   --blaze: #FF5A1F;
   --pitch: #46E08B;
 
-  --chrome-top: 3.25rem;
-  --chrome-bot: 2.75rem;
+  --chrome-top: 3rem;
+  --chrome-bot: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --chrome-top: 3.25rem;
+    --chrome-bot: 2.75rem;
+  }
 }
 
 * { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* anchor jumps must clear the fixed header */
+  scroll-padding-top: calc(var(--chrome-top) + 0.75rem);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 body {
   background: var(--void);
@@ -116,14 +132,29 @@ body {
   }
 }
 
-.shell { padding-inline: clamp(1rem, 4vw, 3.5rem); }
+.shell { padding-inline: clamp(1.125rem, 4vw, 3.5rem); }
+
+/* nothing should end up underneath the fixed footer bar */
+main { padding-bottom: calc(var(--chrome-bot) + 0.5rem); }
 
 
 /* section index row: number, rule, label */
 .index-row {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.875rem;
+}
+@media (min-width: 640px) {
+  .index-row { gap: 1.25rem; }
+}
+/* on a phone the label is nearly as wide as the screen; let the rule keep a
+   minimum length instead of collapsing to a stub */
+.index-row .rule-dot { min-width: 1.5rem; }
+
+/* a phone held sideways has no room for a full-height hero: let it be as
+   tall as its content instead of forcing a screen of it */
+@media (orientation: landscape) and (max-height: 560px) {
+  #intro { min-height: auto !important; }
 }
 
 /* ---------- focus ---------- */

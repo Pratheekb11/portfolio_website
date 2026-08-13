@@ -46,6 +46,10 @@ export default function Halftone({
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  // focus/anchor/region arrive as fresh array literals on every parent render;
+  // key the effect on their values so the grid is drawn once, not per render
+  const geometry = JSON.stringify([focus, anchor, region]);
+
   useEffect(() => {
     const host = hostRef.current;
     const canvas = canvasRef.current;
@@ -180,7 +184,8 @@ export default function Halftone({
       clearTimeout(debounce);
       ro.disconnect();
     };
-  }, [src, cell, mode, shape, ink, fill, focus, falloff, anchor, region, baseline]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src, cell, mode, shape, ink, fill, falloff, baseline, geometry]);
 
   return (
     <div ref={hostRef} className={className} aria-hidden>

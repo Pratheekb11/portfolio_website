@@ -6,12 +6,12 @@ import IndexRow from "@/components/ui/IndexRow";
 
 export default function Beyond() {
   return (
-    <section id="beyond" className="relative w-full py-20 sm:py-28">
+    <section id="beyond" className="relative w-full py-14 sm:py-28">
       <div className="shell">
         <IndexRow n="04" right="AWAY FROM THE EDITOR" />
 
-        <div className="mt-10 grid gap-10 sm:mt-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <h2 className="d text-[clamp(2rem,6vw,4rem)]" style={{ color: "var(--bone)" }}>
+        <div className="mt-8 grid gap-7 sm:mt-14 sm:gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <h2 className="d text-[clamp(2rem,8vw,4rem)]" style={{ color: "var(--bone)" }}>
             WHAT I DO
             <span className="block" style={{ color: "var(--blaze)" }}>
               WITH THE REST
@@ -26,10 +26,10 @@ export default function Beyond() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 0.45, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="card card-invert p-6 sm:p-7"
+                className="card card-invert p-5 sm:p-7"
               >
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="d text-[clamp(1.25rem,3.4vw,2.25rem)]" style={{ color: "var(--c-title)" }}>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5">
+                  <h3 className="d text-[clamp(1.375rem,6vw,2.25rem)]" style={{ color: "var(--c-title)" }}>
                     {o.title}
                   </h3>
                   <span className="meta shrink-0">{o.kind}</span>

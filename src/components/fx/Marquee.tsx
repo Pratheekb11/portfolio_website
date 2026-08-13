@@ -31,7 +31,7 @@ export default function Marquee({
               ? { color: "var(--bone)" }
               : {
                   color: "transparent",
-                  WebkitTextStroke: "1.5px color-mix(in oklab, var(--blaze) 55%, transparent)",
+                  WebkitTextStroke: "1.2px color-mix(in oklab, var(--blaze) 55%, transparent)",
                 }
           }
         >
@@ -45,7 +45,7 @@ export default function Marquee({
     <div ref={ref} className="relative w-full overflow-hidden py-2" aria-hidden>
       <motion.div
         style={{ x }}
-        className="d flex w-max items-center whitespace-nowrap text-[clamp(4.5rem,15vw,13rem)] leading-[0.8]"
+        className="d flex w-max items-center whitespace-nowrap text-[clamp(3.25rem,15vw,13rem)] leading-[0.8]"
       >
         {run("a")}
         {run("b")}
