@@ -29,6 +29,11 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
   // hides their own bottom half. Below lg they are plain stacked cards.
   const stack = useMedia("(min-width: 1024px)");
 
+  // Not everything here is deployed. Where there is no live site, the repo is
+  // the thing to open, and only a purely internal build has neither.
+  const link = item.live ?? item.repo;
+  const linkLabel = item.live ? "Open live site →" : "View the repo →";
+
   return (
     <div
       ref={ref}
@@ -78,21 +83,24 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
             </div>
 
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 sm:mt-8">
-              {item.live ? (
+              {link ? (
                 <Magnetic>
                   <a
-                    href={item.live}
+                    href={link}
                     target="_blank"
                     rel="noreferrer noopener"
                     className="mono inline-flex min-h-[2.75rem] items-center px-5 text-[0.6875rem] font-bold tracking-[0.16em] no-underline transition-opacity duration-200 hover:opacity-85 sm:min-h-[2.5rem] sm:px-4"
                     style={{ background: "var(--blaze)", color: "var(--void)", borderRadius: 6 }}
                   >
-                    Open live site →
+                    {linkLabel}
                   </a>
                 </Magnetic>
               ) : (
                 <span className="meta">{item.status}</span>
               )}
+              {/* a repo-only build shows its status here, since the button slot
+                  it would otherwise occupy is taken by the repo link */}
+              {!item.live && link ? <span className="meta">{item.status}</span> : null}
               <span className="meta">{item.stack.join(" · ")}</span>
             </div>
           </div>
@@ -107,7 +115,7 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
             <Corner className="bottom-8 right-6 border-b border-r" />
             {item.shot ? (
               <a
-                href={item.live}
+                href={link}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="group/shot block aspect-[16/10] w-full overflow-hidden"
@@ -116,7 +124,7 @@ function Project({ item, i, last }: { item: Loadout; i: number; last: boolean })
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={item.shot}
-                  alt={`Screenshot of the ${item.name} site`}
+                  alt={`Screenshot of ${item.name}`}
                   loading="lazy"
                   className="block h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover/shot:scale-[1.05]"
                 />

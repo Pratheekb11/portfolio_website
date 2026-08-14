@@ -14,6 +14,7 @@ export type Loadout = {
   name: string;
   tag: string;
   live?: string;
+  repo?: string;
   shot?: string;
   summary: string;
   detail: string[];
@@ -43,6 +44,26 @@ export const LOADOUTS: Loadout[] = [
     ],
     stack: ["Next.js", "LLM APIs", "Vercel"],
     status: "100+ users · 50+ recurring",
+  },
+  {
+    id: "nenapu",
+    kind: "Agent Memory",
+    year: "2026 to now",
+    figures: [{ value: "6", label: "BELIEF SIGNALS" }, { value: "0", label: "TOOL CALLS TO RECALL" }, { value: "288", label: "TESTS" }],
+    name: "NENAPU",
+    tag: "Personal · Work in progress",
+    repo: "https://github.com/Pratheekb11/Nenapu",
+    shot: asset("/media/nenapu.png"),
+    summary:
+      "Every agent memory system I tried was write-and-retrieve, so a fact could be stale for months and still come back at full confidence. Nenapu (ನೆನಪು, memory in Kannada) is the memory layer that tracks what a fact rests on and whether recalling it actually helped.",
+    detail: [
+      "Belief is six signals rather than a number you set: asserted confidence, provenance, decay, a verification command, track record and support. Falsify one fact and the collapse cascades to everything inferred from it.",
+      "Nothing declares those dependencies. Recall fact A and write fact B in the same session and B is recorded as resting on A, so a rename that breaks A quietly demotes B too.",
+      "It is a layer, not a tool call. Two Claude Code hooks do the work: SessionStart injects what it has learned, Stop reads the finished transcript in the background and extracts the corrections. Cursor and Codex reach the same store over MCP.",
+      "Still in progress and openly unfinished. Python on SQLite, one file at ~/.nenapu, credentials redacted upstream of both the model call and the store.",
+    ],
+    stack: ["Python", "SQLite", "MCP", "Claude Code hooks", "Typer"],
+    status: "Work in progress · open source",
   },
   {
     id: "ooh",
