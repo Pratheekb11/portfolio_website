@@ -5,9 +5,14 @@ import { ARMORY, CREDENTIALS, PLAYER } from "@/lib/data";
 import IndexRow from "@/components/ui/IndexRow";
 import Marquee from "@/components/fx/Marquee";
 import Halftone from "@/components/fx/Halftone";
+import useMedia from "@/components/ui/useMedia";
 import { asset } from "@/lib/asset";
 
 export default function Stack() {
+  // the portrait box is 256px on a phone against 384px on a laptop, so it needs
+  // a finer grid and a tighter crop to keep the face readable
+  const phone = useMedia("(max-width: 639px)");
+
   return (
     <section id="stack" className="relative w-full py-14 sm:py-28">
       <h2 className="sr-only">The tools I keep</h2>
@@ -28,10 +33,11 @@ export default function Stack() {
           >
             <Halftone
               src={asset("/media/player.jpg")}
-              cell={5}
+              cell={phone ? 3 : 5}
               mode="duotone"
               fill="var(--blaze)"
-              anchor={[0.5, 0.05]}
+              anchor={phone ? [0.52, 0.02] : [0.5, 0.05]}
+              zoom={phone ? 1.3 : 1}
               className="h-full w-full"
             />
           </div>

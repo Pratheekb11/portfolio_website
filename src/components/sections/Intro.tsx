@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Halftone from "@/components/fx/Halftone";
+import useMedia from "@/components/ui/useMedia";
 import { asset } from "@/lib/asset";
 
 const CHIPS = ["2.5 years in production", "Bengaluru, India", "Bosch Global Software Technologies"];
@@ -16,11 +17,23 @@ const rise = {
 };
 
 export default function Intro() {
+  // a phone column is a third of a laptop's, so the same cell size leaves the
+  // face with a quarter of the dots and it reads as noise. narrow screens get
+  // a finer grid and a crop tight enough that the head, not the torso, fills it.
+  const phone = useMedia("(max-width: 639px)");
+  // a phone on its side is wide but only ~300px tall, so the tall portrait crop
+  // lands on the jaw. it gets its own head-and-shoulders framing.
+  const shortLandscape = useMedia("(max-height: 520px) and (orientation: landscape)");
+
   return (
     <section
       id="intro"
       className="relative flex w-full items-stretch overflow-hidden"
-      style={{ minHeight: "100svh", paddingTop: "var(--chrome-top)", paddingBottom: "var(--chrome-bot)" }}
+      style={{
+        minHeight: shortLandscape ? "auto" : "100svh",
+        paddingTop: "var(--chrome-top)",
+        paddingBottom: "var(--chrome-bot)",
+      }}
     >
       {/* one continuous dot field across the whole screen; he resolves out of the left of it */}
       <motion.div
@@ -31,14 +44,21 @@ export default function Intro() {
       >
         <Halftone
           src={asset("/media/player.jpg")}
-          cell={7}
+          cell={phone || shortLandscape ? 4 : 7}
           shape="square"
-          region={[0.46, 0.02, 0.58, 0.98]}
-          anchor={[0.5, 0.02]}
-          focus={[0.77, 0.45]}
-          falloff={0.44}
-          baseline={0.075}
-          className="h-full w-full opacity-80 sm:opacity-100"
+          region={
+            phone
+              ? [0.22, 0.08, 0.76, 0.7]
+              : shortLandscape
+                ? [0.52, 0.02, 0.46, 0.96]
+                : [0.46, 0.02, 0.58, 0.98]
+          }
+          anchor={phone ? [0.55, 0.06] : [0.5, 0.02]}
+          zoom={phone ? 1.24 : 1}
+          focus={phone ? [0.58, 0.31] : shortLandscape ? [0.76, 0.5] : [0.77, 0.45]}
+          falloff={phone ? 0.55 : 0.44}
+          baseline={phone ? 0.06 : 0.075}
+          className="h-full w-full"
         />
         {/* phone: the portrait sits behind the type, so it needs a heavier
             scrim from the bottom up. wide: the original left-side wash. */}
@@ -46,7 +66,7 @@ export default function Intro() {
           className="absolute inset-0 sm:hidden"
           style={{
             background:
-              "linear-gradient(to top, var(--void) 16%, color-mix(in oklab, var(--void) 78%, transparent) 40%, transparent 72%), linear-gradient(to bottom, var(--void) 2%, transparent 14%)",
+              "linear-gradient(to top, var(--void) 16%, color-mix(in oklab, var(--void) 78%, transparent) 40%, transparent 72%), linear-gradient(to bottom, var(--void) 9%, color-mix(in oklab, var(--void) 72%, transparent) 17%, transparent 26%)",
           }}
         />
         <div

@@ -23,6 +23,7 @@ export default function Halftone({
   anchor = [0.5, 0.5],
   region,
   baseline = 0,
+  zoom = 1,
 }: {
   src: string;
   className?: string;
@@ -42,6 +43,8 @@ export default function Halftone({
   region?: [number, number, number, number];
   /** faint cells everywhere else, so the grid reads as one continuous field */
   baseline?: number;
+  /** tightens the cover-crop around the anchor, so a narrow box can still hold a face */
+  zoom?: number;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -75,7 +78,7 @@ export default function Halftone({
       const rect = host.getBoundingClientRect();
       const w = Math.max(1, Math.round(rect.width));
       const h = Math.max(1, Math.round(rect.height));
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 3);
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -102,15 +105,17 @@ export default function Halftone({
       const dr = dw / dh;
       let sw = img.width;
       let sh = img.height;
-      let sx = 0;
-      let sy = 0;
       if (sr > dr) {
         sw = img.height * dr;
-        sx = (img.width - sw) * anchor[0];
       } else {
         sh = img.width / dr;
-        sy = (img.height - sh) * anchor[1];
       }
+      // zoom > 1 keeps less of the source, which is what lets a phone-width
+      // box hold a face instead of a whole torso
+      sw = Math.min(img.width, sw / zoom);
+      sh = Math.min(img.height, sh / zoom);
+      const sx = (img.width - sw) * anchor[0];
+      const sy = (img.height - sh) * anchor[1];
       octx.drawImage(img, sx, sy, sw, sh, dx0, dy0, dw, dh);
       const data = octx.getImageData(0, 0, cols, rows).data;
 
@@ -185,7 +190,7 @@ export default function Halftone({
       ro.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src, cell, mode, shape, ink, fill, falloff, baseline, geometry]);
+  }, [src, cell, mode, shape, ink, fill, falloff, baseline, zoom, geometry]);
 
   return (
     <div ref={hostRef} className={className} aria-hidden>
