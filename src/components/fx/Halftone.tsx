@@ -24,6 +24,8 @@ export default function Halftone({
   region,
   baseline = 0,
   zoom = 1,
+  lift = 0.16,
+  gain = 1.85,
 }: {
   src: string;
   className?: string;
@@ -45,6 +47,11 @@ export default function Halftone({
   baseline?: number;
   /** tightens the cover-crop around the anchor, so a narrow box can still hold a face */
   zoom?: number;
+  /** black point. anything darker than this drops out of the grid */
+  lift?: number;
+  /** contrast push above the black point. a coarse grid needs less of it, or the
+      highlights on a face merge into one white slab */
+  gain?: number;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -136,7 +143,7 @@ export default function Halftone({
           let v = (0.2126 * data[i * 4] + 0.7152 * data[i * 4 + 1] + 0.0722 * data[i * 4 + 2]) / 255;
 
           // push contrast so the subject separates from a busy background
-          v = Math.min(1, Math.max(0, (v - 0.16) * 1.85));
+          v = Math.min(1, Math.max(0, (v - lift) * gain));
 
           if (mode === "ink") {
             // fade the grid away from the subject so the frame dissolves into the page
@@ -190,7 +197,7 @@ export default function Halftone({
       ro.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src, cell, mode, shape, ink, fill, falloff, baseline, zoom, geometry]);
+  }, [src, cell, mode, shape, ink, fill, falloff, baseline, zoom, lift, gain, geometry]);
 
   return (
     <div ref={hostRef} className={className} aria-hidden>

@@ -44,7 +44,7 @@ export default function Intro() {
       >
         <Halftone
           src={asset("/media/player.jpg")}
-          cell={phone || shortLandscape ? 4 : 7}
+          cell={phone ? 3 : shortLandscape ? 4 : 7}
           shape="square"
           region={
             phone
@@ -58,6 +58,10 @@ export default function Intro() {
           focus={phone ? [0.58, 0.31] : shortLandscape ? [0.76, 0.5] : [0.77, 0.45]}
           falloff={phone ? 0.55 : 0.44}
           baseline={phone ? 0.06 : 0.075}
+          // fewer dots per feature means the usual contrast push welds the
+          // eyes and cheekbones into one bright slab, so ease it off on a phone
+          lift={phone || shortLandscape ? 0.06 : 0.16}
+          gain={phone || shortLandscape ? 1.5 : 1.85}
           className="h-full w-full"
         />
         {/* phone: the portrait sits behind the type, so it needs a heavier
