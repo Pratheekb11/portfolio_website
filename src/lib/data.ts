@@ -122,55 +122,6 @@ export const LOADOUTS: Loadout[] = [
     stack: ["FastAPI", "React", "Vite", "PRD / C4"],
     status: "Iterating toward MVP",
   },
-  {
-    id: "mutation-obs",
-    kind: "Observability",
-    year: "2026",
-    figures: [{ value: "7", label: "LIVE SIGNALS" }, { value: "100%", label: "PIPELINE INSTRUMENTED" }, { value: "CI", label: "TRIGGERED" }],
-    name: "MUTATION OBSERVABILITY",
-    tag: "Bosch · In production",
-    summary:
-      "Test engineers had no way to tell whether LLM-generated mutants improved real test quality or just added noise.",
-    detail: [
-      "Observability dashboard on Grafana + Prometheus, backed by OpenTelemetry.",
-      "Surfaces token spend, latency, mutation bias, coverage, an LLM trust score, and LLM-as-judge recommendations.",
-      "Full pipeline instrumented: a check-in triggers GitHub Actions, which compiles, generates mutants via the Claude API, runs G-Test and logs the results back.",
-    ],
-    stack: ["Grafana", "Prometheus", "OpenTelemetry", "GitHub Actions"],
-    status: "Live pipeline",
-  },
-  {
-    id: "sdlc-orchestrator",
-    kind: "Agent Pipeline",
-    year: "2024 to now",
-    figures: [{ value: "4", label: "AGENT STAGES" }, { value: "1", label: "HUMAN GATE" }, { value: "E2E", label: "DESIGN TO CODE" }],
-    name: "AGENTIC SDLC ORCHESTRATOR",
-    tag: "Bosch · Internal",
-    summary:
-      "Closes the gap between a design doc and shipped code, running from design ingestion through code generation and unit testing to a human review gate.",
-    detail: [
-      "End-to-end multi-agent pipeline with custom orchestration logic.",
-      "Human review is a gate, not an afterthought.",
-    ],
-    stack: ["LangChain", "Azure OpenAI", "Custom orchestration"],
-    status: "Running across teams",
-  },
-  {
-    id: "prompt-library",
-    kind: "Developer Tool",
-    year: "2025",
-    figures: [{ value: "50+", label: "ENGINEERS" }, { value: "-45%", label: "PROMPT ITERATION" }, { value: "1", label: "VS CODE PLUGIN" }],
-    name: "PROMPT LIBRARY PLUGIN",
-    tag: "Bosch · Shipped",
-    summary:
-      "Traced recurring complaints about bad LLM output quality back to the real cause: everyone was writing their own prompts from scratch.",
-    detail: [
-      "VS Code plugin adopted by 50+ engineers across the org.",
-      "Prompt iteration time down 45%.",
-    ],
-    stack: ["VS Code API", "TypeScript"],
-    status: "50+ engineers",
-  },
 ];
 
 export const ARMORY: { group: string; accent: string; items: string[] }[] = [
