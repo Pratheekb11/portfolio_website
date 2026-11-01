@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal site for Pratheek B, Gen AI Engineer.
+Personal site for Pratheek B, AI Engineer.
 
 Built with Next.js 16, Tailwind v4 and Motion. Fully static: no server,
 no API routes, no database.

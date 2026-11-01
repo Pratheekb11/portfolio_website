@@ -88,7 +88,7 @@ export default function Intro() {
             className="d text-[clamp(1.125rem,min(4.6vw,4.4vh),1.625rem)]"
             style={{ color: "var(--bone)", letterSpacing: "0.01em", fontWeight: 600 }}
           >
-            GEN AI ENGINEER
+            AI ENGINEER
           </p>
           <p className="meta mt-2">AGENTIC SYSTEMS · LLM INFRASTRUCTURE · PRODUCT THINKING</p>
         </motion.div>
