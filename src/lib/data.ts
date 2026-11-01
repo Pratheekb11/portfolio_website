@@ -38,7 +38,8 @@ export const LOADOUTS: Loadout[] = [
     summary:
       "Most people use a language model daily and have never seen what it does while it answers, so I made them play against one first.",
     detail: [
-      "One five-minute game against a real model (DistilGPT-2, read directly), then six short chapters if you want them.",
+      "Twenty-five short lessons, each one a game you play before anything is explained: a live tokenizer, a decision boundary swinging into place, a threshold sliding through 1,115 real messages.",
+      "Nothing is simulated. Every token, weight and probability is computed live by a real model or precomputed by a committed script, with its source recorded.",
       "100+ users with 50+ returning. The retention half is the number that matters.",
       "Nothing to sign up for. You play first, you read afterwards.",
     ],
@@ -49,7 +50,7 @@ export const LOADOUTS: Loadout[] = [
     id: "nenapu",
     kind: "Agent Memory",
     year: "2026 to now",
-    figures: [{ value: "6", label: "BELIEF SIGNALS" }, { value: "0", label: "TOOL CALLS TO RECALL" }, { value: "288", label: "TESTS" }],
+    figures: [{ value: "6", label: "BELIEF SIGNALS" }, { value: "0", label: "TOOL CALLS TO RECALL" }, { value: "1,200+", label: "TESTS" }],
     name: "NENAPU",
     tag: "Personal · Work in progress",
     repo: "https://github.com/Pratheekb11/Nenapu",
@@ -64,6 +65,43 @@ export const LOADOUTS: Loadout[] = [
     ],
     stack: ["Python", "SQLite", "MCP", "Claude Code hooks", "Typer"],
     status: "Work in progress · open source",
+  },
+  {
+    id: "founder-copilot",
+    kind: "AI Advisor",
+    year: "2026",
+    figures: [{ value: "999", label: "DEAD STARTUPS" }, { value: "10", label: "ADVICE SOURCES" }, { value: "$0", label: "TO RUN" }],
+    name: "FOUNDER COPILOT",
+    tag: "Personal · Working build",
+    shot: asset("/media/founder-copilot.png"),
+    summary:
+      "Founders ask a chatbot whether their idea is good and get encouragement. Founder Copilot answers from the 999 startups that already tried something similar and died.",
+    detail: [
+      "Each dead startup is embedded locally and tagged with its causes of death, so an idea gets real cause-of-death odds before any model writes a word.",
+      "Three modes: assess my idea, find me a dead idea worth rebuilding, and pitch to a skeptical VC who asks one hard question at a time.",
+      "Tool-calling agent over the graveyard, a credited advice corpus from 10 sources and live Hacker News demand checks. Runs entirely on free LLM tiers.",
+    ],
+    stack: ["FastAPI", "fastembed", "Tool-calling LLMs", "OpenRouter / Gemini"],
+    status: "Working build",
+  },
+  {
+    id: "takedown",
+    kind: "Game",
+    year: "2026",
+    figures: [{ value: "0", label: "LIBRARIES" }, { value: "8", label: "FIGHTS PER ARCADE RUN" }, { value: "3", label: "INPUT TYPES" }],
+    name: "TAKE DOWN",
+    tag: "Personal · Playable",
+    repo: "https://github.com/Pratheekb11/takedown",
+    shot: asset("/media/takedown.png"),
+    summary:
+      "A 1v1 street fighter in the style of 16-bit arcade games, written in plain JavaScript and Canvas with no libraries and no build step.",
+    detail: [
+      "A Python tool cuts sprite sheets into animation atlases, so adding a fighter means adding a sheet, not writing code.",
+      "Arcade mode runs eight fights with scoring, continues and per-fighter stars across three CPU difficulties.",
+      "Keyboard, touch and gamepad all drive the same input layer, which is what makes the planned two-player mode a small change.",
+    ],
+    stack: ["JavaScript", "Canvas", "Python", "PWA"],
+    status: "Playable · open source",
   },
   {
     id: "ooh",

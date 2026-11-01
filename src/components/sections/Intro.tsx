@@ -5,7 +5,7 @@ import Halftone from "@/components/fx/Halftone";
 import useMedia from "@/components/ui/useMedia";
 import { asset } from "@/lib/asset";
 
-const CHIPS = ["2.5 years in production", "Bengaluru, India", "Bosch Global Software Technologies"];
+const CHIPS = ["3 years in production", "Bengaluru, India", "Bosch Global Software Technologies"];
 
 const rise = {
   hidden: { opacity: 0, y: 24 },
