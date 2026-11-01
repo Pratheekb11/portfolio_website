@@ -72,7 +72,8 @@ export const LOADOUTS: Loadout[] = [
     year: "2026",
     figures: [{ value: "999", label: "DEAD STARTUPS" }, { value: "10", label: "ADVICE SOURCES" }, { value: "$0", label: "TO RUN" }],
     name: "FOUNDER COPILOT",
-    tag: "Personal · Working build",
+    tag: "Personal · Live",
+    live: "https://founders-assist.vercel.app/",
     shot: asset("/media/founder-copilot.png"),
     summary:
       "Founders ask a chatbot whether their idea is good and get encouragement. Founder Copilot answers from the 999 startups that already tried something similar and died.",
@@ -82,7 +83,7 @@ export const LOADOUTS: Loadout[] = [
       "Tool-calling agent over the graveyard, a credited advice corpus from 10 sources and live Hacker News demand checks. Runs entirely on free LLM tiers.",
     ],
     stack: ["FastAPI", "fastembed", "Tool-calling LLMs", "OpenRouter / Gemini"],
-    status: "Working build",
+    status: "Live",
   },
   {
     id: "takedown",
