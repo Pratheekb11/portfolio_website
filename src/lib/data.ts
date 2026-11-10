@@ -47,6 +47,26 @@ export const LOADOUTS: Loadout[] = [
     status: "100+ users · 50+ recurring",
   },
   {
+    id: "liverate",
+    kind: "Live Audience Voting",
+    year: "2026",
+    figures: [{ value: "9", label: "QUESTION TYPES" }, { value: "1.5 S", label: "TO THE BIG SCREEN" }, { value: "400+", label: "TESTS" }],
+    name: "LIVERATE",
+    tag: "Personal · Live",
+    live: "https://liverate-beta.vercel.app/",
+    shot: asset("/media/liverate.png"),
+    summary:
+      "Asking a room what it thinks usually means a sign-up wall for the presenter and an app for the audience. LiveRate needs neither: start as a guest, show a QR code, and the answers land on the big screen as people tap.",
+    detail: [
+      "Nine question types: rate topics on your own criteria, polls, ranking, numbers, open answers, word clouds, audience Q&A with upvotes, and a timed quiz with a live leaderboard.",
+      "Every tap is one SQL statement that upserts on voter and cell, so a changed answer replaces the old one and never counts twice. A queue on the phone retries through dropped connections and reloads.",
+      "Anonymous by design: no names, no IPs, voter ids replaced with R1, R2 in exports. Guest presentations delete themselves after 7 days.",
+      "AI insights are opt-in per presentation and never touch the voting path, so a guest who ignores them gets exactly the same app.",
+    ],
+    stack: ["Next.js", "Neon Postgres", "Tailwind", "Gemini", "Vercel"],
+    status: "Live",
+  },
+  {
     id: "nenapu",
     kind: "Agent Memory",
     year: "2026 to now",
@@ -211,7 +231,7 @@ export const PRODUCT = [
     title: "START WITH THE USER",
     lead: "Nothing gets built until I understand who is losing time and why.",
     body:
-      "For the OOH marketplace I ran around 20 structured discovery interviews with advertisers and agencies before writing a line of code. At Bosch, every tool I have shipped started as a complaint someone kept repeating in standups.",
+      "For the OOH marketplace I ran around 20 structured discovery interviews with advertisers and agencies before writing a line of code. LiveRate went guest-first for the same reason: a presenter should be asking the room within seconds, not filling in a sign-up form.",
     figure: { value: "~20", label: "DISCOVERY INTERVIEWS" },
   },
   {
@@ -227,7 +247,7 @@ export const PRODUCT = [
     title: "ADOPTION IS THE SCORE",
     lead: "Shipping is the halfway mark. People choosing to keep using it is the result.",
     body:
-      "250+ developers on the instruction-set extension, 50+ on the prompt library, and a 25% lift in AI tool adoption across the org. AI in Five has 100+ users and 50+ who came back, which is the number I actually watch.",
-    figure: { value: "+25%", label: "ORG TOOL ADOPTION" },
+      "AI in Five has 100+ users and 50+ who came back, which is the number I actually watch. LiveRate's audience needs no app and no account, because every extra step costs answers.",
+    figure: { value: "50+", label: "RETURNING USERS" },
   },
 ];

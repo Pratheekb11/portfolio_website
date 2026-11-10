@@ -22,10 +22,10 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Pratheek B, AI Engineer",
   description:
-    "AI engineer building production agentic systems across 10 OEM programs. Multi-agent SDLC, RAG at scale, and an out-of-home ad marketplace built solo.",
+    "AI engineer shipping solo projects people actually use: AI in Five, LiveRate, Founder Copilot, an agent memory layer and an out-of-home ad marketplace.",
   openGraph: {
     title: "Pratheek B, AI Engineer",
-    description: "Production agentic AI. 250+ developers served. Built solo, shipped for real.",
+    description: "AI engineer. Solo projects, built and shipped for real.",
     type: "profile",
   },
 };
